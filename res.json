@@ -1,46 +1,30 @@
 [
   {
-    "Trivia": "Comment"
-  },
-  {
-    "Trivia": "Comment"
-  },
-  {
-    "Trivia": "Whitespace"
-  },
-  {
     "Literal": {
       "Number": {
         "element": "1",
         "position": {
-          "start_line": 6,
+          "start_line": 1,
           "start_column": 1,
-          "end_line": 6,
+          "end_line": 1,
           "end_column": 2,
-          "start_offset": 97,
-          "end_offset": 98
+          "start_offset": 0,
+          "end_offset": 1
         }
       }
     }
   },
   {
-    "Trivia": "Whitespace"
-  },
-  {
     "Literal": {
-      "String": {
-        "elements": [
-          {
-            "PlainString": "string"
-          }
-        ],
+      "Number": {
+        "element": "+3",
         "position": {
-          "start_line": 7,
-          "start_column": 1,
-          "end_line": 7,
-          "end_column": 9,
-          "start_offset": 100,
-          "end_offset": 108
+          "start_line": 1,
+          "start_column": 2,
+          "end_line": 1,
+          "end_column": 4,
+          "start_offset": 1,
+          "end_offset": 3
         }
       }
     }

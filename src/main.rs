@@ -18,7 +18,6 @@ fn main() -> io::Result<()> {
     println!("Time elapsed: {:?}", duration);
     let output_path = "res.json";
 
-    println!("{}", serde_json::to_string_pretty(&parsed_result)?);
     let mut output_file = fs::File::create(output_path)?;
     let parsed_json = serde_json::to_string_pretty(&parsed_result)?;
     write!(output_file, "{}", parsed_json)?;
