@@ -1,0 +1,13 @@
+[package]
+name = "kitsune-lang"
+version = "0.1.0"
+authors = [
+    "Levi Lim <shiueo.csh@gmail.com>",
+]
+edition = "2024"
+rust-version = "1.88.0"
+
+[dependencies]
+inkwell = { version = "0.6.0", features = ["llvm18-1"] }
+nom = "8.0.0"
+nom_locate = "5.0.0"
