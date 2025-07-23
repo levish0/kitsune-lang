@@ -1,0 +1,30 @@
+use crate::nodes::literals::{LiteralElement, StringElement};
+use nom::bytes::complete::tag;
+
+use crate::parser::literals::string::string_core::literal_string_core_parser;
+use crate::utils::position::make_position;
+use crate::utils::span::Span;
+
+use nom::IResult;
+use nom::Parser;
+use nom::combinator::complete;
+use nom::sequence::delimited;
+use nom_locate::position;
+
+pub fn literal_string_parser(input: Span) -> IResult<Span, LiteralElement> {
+    let (input, start_pos) = position(input)?;
+    let (input, elements) = complete(delimited(
+        tag("\""),
+        |input| literal_string_core_parser(input),
+        tag("\""),
+    ))
+    .parse(input)?;
+    let (remaining_input, end_pos) = position(input)?;
+
+    let position = make_position(start_pos, end_pos);
+
+    Ok((
+        remaining_input,
+        LiteralElement::String(StringElement { elements, position }),
+    ))
+}

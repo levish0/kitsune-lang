@@ -1,0 +1,17 @@
+[
+  {
+    "Literal": {
+      "Number": {
+        "element": "1",
+        "position": {
+          "start_line": 1,
+          "start_column": 1,
+          "end_line": 1,
+          "end_column": 2,
+          "start_offset": 0,
+          "end_offset": 1
+        }
+      }
+    }
+  }
+]
