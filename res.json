@@ -16,15 +16,19 @@
   },
   {
     "Literal": {
-      "Number": {
-        "element": "+3",
+      "String": {
+        "elements": [
+          {
+            "PlainString": "aa"
+          }
+        ],
         "position": {
           "start_line": 1,
           "start_column": 2,
           "end_line": 1,
-          "end_column": 4,
+          "end_column": 6,
           "start_offset": 1,
-          "end_offset": 3
+          "end_offset": 5
         }
       }
     }

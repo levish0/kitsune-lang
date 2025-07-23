@@ -8,7 +8,6 @@ edition = "2024"
 rust-version = "1.88.0"
 
 [dependencies]
-inkwell = { version = "0.6.0", features = ["llvm18-1"] }
 nom = "8.0.0"
 nom_locate = "5.0.0"
 serde = { version = "1.0.219", features = ["derive"] }
