@@ -21,5 +21,10 @@ On Windows, prebuilt LLVM binaries often **do not include** `llvm-config.exe` or
    $env:LLVM_SYS_181_PREFIX = "C:\path\to\your\llvm"
    ```
 4. After that, running cargo build should detect your LLVM build correctly.
+> **Important:**  
+> The LLVM installation directory path **must not contain spaces** (e.g., avoid paths like `C:\Program Files\LLVM`).  
+> If your LLVM folder path includes spaces, the build will fail due to issues with command-line argument parsing in the compiler.
+>
+> To avoid this, either install LLVM to a path without spaces (e.g., `C:\LLVM`) or create a symbolic link/junction without spaces pointing to your LLVM directory and set `LLVM_SYS_181_PREFIX` accordingly.
 
 This manual build is necessary to ensure compatibility with llvm-sys and successful compilation of kitsune-lang on Windows.
