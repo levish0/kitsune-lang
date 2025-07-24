@@ -1,7 +1,7 @@
 use crate::nodes::literals::{LiteralElement, StringElement};
 use nom::bytes::complete::tag;
 
-use crate::parser::expressions::literals::string::string_core::literal_string_core_parser;
+use crate::parser::expressions::units::literals::string::string_core::literal_string_core_parser;
 use crate::utils::position::make_position;
 use crate::utils::span::Span;
 

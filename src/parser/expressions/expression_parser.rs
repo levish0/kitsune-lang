@@ -1,8 +1,8 @@
 use crate::nodes::expressions::{BinaryOperation, ExpressionElement};
-use crate::parser::expressions::expression_comparison::expression_comparison_parser;
-use crate::parser::expressions::expression_logical_op::expression_logical_op_parser;
-use crate::parser::expressions::expression_mul_div_mod_op::expression_mul_div_mod_op_parser;
-use crate::parser::expressions::expression_unary::expression_unary_parser;
+use crate::parser::expressions::operations::expression_comparison::expression_comparison_parser;
+use crate::parser::expressions::operators::expression_logical_op::expression_logical_op_parser;
+use crate::parser::expressions::operators::expression_mul_div_mod_op::expression_mul_div_mod_op_parser;
+use crate::parser::expressions::unary::expression_unary::expression_unary_parser;
 use crate::utils::span::Span;
 use nom::multi::fold_many0;
 use nom::sequence::pair;

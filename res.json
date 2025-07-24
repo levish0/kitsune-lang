@@ -5,29 +5,49 @@
         "left": {
           "Binary": {
             "left": {
-              "ExpressionUnit": {
-                "element": {
-                  "Parenthesized": {
+              "Binary": {
+                "left": {
+                  "ExpressionUnit": {
                     "element": {
-                      "Binary": {
-                        "left": {
-                          "ExpressionUnit": {
-                            "element": {
-                              "Variable": {
-                                "element": "a"
+                      "Parenthesized": {
+                        "element": {
+                          "Binary": {
+                            "left": {
+                              "ExpressionUnit": {
+                                "element": {
+                                  "Literal": {
+                                    "Number": {
+                                      "element": "1"
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "operator": "Subtract",
+                            "right": {
+                              "ExpressionUnit": {
+                                "element": {
+                                  "Literal": {
+                                    "Number": {
+                                      "element": "3"
+                                    }
+                                  }
+                                }
                               }
                             }
                           }
-                        },
-                        "operator": "Add",
-                        "right": {
-                          "ExpressionUnit": {
-                            "element": {
-                              "Variable": {
-                                "element": "b"
-                              }
-                            }
-                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "operator": "Multiply",
+                "right": {
+                  "ExpressionUnit": {
+                    "element": {
+                      "Literal": {
+                        "Number": {
+                          "element": "8"
                         }
                       }
                     }
@@ -39,15 +59,17 @@
             "right": {
               "ExpressionUnit": {
                 "element": {
-                  "Variable": {
-                    "element": "c"
+                  "Literal": {
+                    "Number": {
+                      "element": "4"
+                    }
                   }
                 }
               }
             }
           }
         },
-        "operator": "Add",
+        "operator": "Concat",
         "right": {
           "ExpressionUnit": {
             "element": {
