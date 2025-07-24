@@ -6,6 +6,7 @@ use std::time::Instant;
 mod node;
 mod parser;
 mod utils;
+mod codegen;
 
 fn main() -> io::Result<()> {
     let input_path = "main.kitsune";
