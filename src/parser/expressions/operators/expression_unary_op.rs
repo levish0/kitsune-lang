@@ -1,4 +1,4 @@
-use crate::nodes::expressions::expressions::UnaryOperator;
+use crate::nodes::expressions::operators::unary::UnaryOperator;
 use crate::utils::position::make_position;
 use crate::utils::span::Span;
 use nom::branch::alt;

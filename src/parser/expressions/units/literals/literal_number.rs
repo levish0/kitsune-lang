@@ -1,5 +1,7 @@
 use crate::nodes::expressions::expressions::ExpressionElement;
-use crate::nodes::literals::{LiteralElement, NumberElement};
+
+use crate::nodes::expressions::literals::literals::LiteralElement;
+use crate::nodes::expressions::literals::number::NumberElement;
 use crate::utils::position::{Position, make_position};
 use crate::utils::span::Span;
 use nom::IResult;

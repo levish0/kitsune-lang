@@ -1,5 +1,4 @@
-use crate::nodes::literals::LiteralElement;
-
+use crate::nodes::expressions::literals::literals::LiteralElement;
 use crate::parser::expressions::units::literals::string::escaped_string::escaped_string_parser;
 use crate::parser::expressions::units::literals::string::string_text::literal_string_text_parser;
 use crate::utils::span::Span;

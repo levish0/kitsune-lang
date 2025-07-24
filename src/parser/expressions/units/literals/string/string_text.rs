@@ -1,5 +1,5 @@
-use crate::nodes::literals::LiteralElement;
-use crate::nodes::literals::LiteralElement::PlainString;
+use crate::nodes::expressions::literals::literals::LiteralElement;
+use crate::nodes::expressions::literals::literals::LiteralElement::PlainString;
 use crate::utils::span::Span;
 use nom::IResult;
 use nom::Parser;

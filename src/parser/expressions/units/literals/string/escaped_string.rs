@@ -1,4 +1,5 @@
-use crate::nodes::literals::{EscapedStringElement, LiteralElement};
+use crate::nodes::expressions::literals::literals::LiteralElement;
+use crate::nodes::expressions::literals::string::EscapedStringElement;
 use crate::utils::position::make_position;
 use crate::utils::span::Span;
 use nom::character::complete::{anychar, char};

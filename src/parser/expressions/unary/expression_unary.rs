@@ -1,4 +1,5 @@
-use crate::nodes::expressions::expressions::{ExpressionElement, UnaryOperation};
+use crate::nodes::expressions::expressions::ExpressionElement;
+use crate::nodes::expressions::operations::UnaryOperation;
 use crate::parser::expressions::operators::expression_unary_op::expression_unary_op_parser;
 use crate::parser::expressions::units::expression_unit_parser::expression_unit_parser;
 use crate::utils::span::Span;

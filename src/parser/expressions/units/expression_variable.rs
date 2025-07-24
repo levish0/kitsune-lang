@@ -1,4 +1,5 @@
-use crate::nodes::expressions::expressions::{ExpressionElement, VariableElement};
+use crate::nodes::expressions::expressions::ExpressionElement;
+use crate::nodes::expressions::units::VariableElement;
 use crate::utils::position::make_position;
 use crate::utils::span::Span;
 use nom::character::complete::alphanumeric1;
