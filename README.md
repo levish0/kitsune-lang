@@ -1,2 +1,2 @@
-# kitsune-lang
+# kitsune-script
 kitsune-script
