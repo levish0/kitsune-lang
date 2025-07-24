@@ -1,4 +1,4 @@
-use crate::nodes::expressions::BinaryOperator;
+use crate::nodes::expressions::expressions::BinaryOperator;
 use crate::utils::span::Span;
 use nom::branch::alt;
 use nom::character::complete::{char, multispace0};

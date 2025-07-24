@@ -1,4 +1,4 @@
-use crate::nodes::expressions::{BinaryOperation, ExpressionElement};
+use crate::nodes::expressions::expressions::{BinaryOperation, ExpressionElement};
 use crate::parser::expressions::operations::expression_factor::expression_factor_parser;
 use crate::parser::expressions::operators::expression_add_sub_concat_op::expression_add_sub_concat_op_parser;
 use crate::parser::expressions::operators::expression_mul_div_mod_op::expression_mul_div_mod_op_parser;

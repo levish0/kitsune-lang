@@ -1,4 +1,4 @@
-use crate::nodes::expressions::ExpressionElement;
+use crate::nodes::expressions::expressions::ExpressionElement;
 use crate::nodes::trivia::TriviaElement;
 use serde::Serialize;
 

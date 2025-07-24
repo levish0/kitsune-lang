@@ -5,7 +5,7 @@ use crate::parser::expressions::units::literals::string::string_core::literal_st
 use crate::utils::position::make_position;
 use crate::utils::span::Span;
 
-use crate::nodes::expressions::ExpressionElement;
+use crate::nodes::expressions::expressions::ExpressionElement;
 use nom::IResult;
 use nom::Parser;
 use nom::combinator::complete;
