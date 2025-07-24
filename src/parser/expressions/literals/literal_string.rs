@@ -1,17 +1,18 @@
 use crate::nodes::literals::{LiteralElement, StringElement};
 use nom::bytes::complete::tag;
 
-use crate::parser::literals::string::string_core::literal_string_core_parser;
+use crate::parser::expressions::literals::string::string_core::literal_string_core_parser;
 use crate::utils::position::make_position;
 use crate::utils::span::Span;
 
+use crate::nodes::expressions::ExpressionElement;
 use nom::IResult;
 use nom::Parser;
 use nom::combinator::complete;
 use nom::sequence::delimited;
 use nom_locate::position;
 
-pub fn literal_string_parser(input: Span) -> IResult<Span, LiteralElement> {
+pub fn literal_string_parser(input: Span) -> IResult<Span, ExpressionElement> {
     let (input, start_pos) = position(input)?;
     let (input, elements) =
         complete(delimited(tag("\""), literal_string_core_parser, tag("\""))).parse(input)?;
@@ -21,6 +22,6 @@ pub fn literal_string_parser(input: Span) -> IResult<Span, LiteralElement> {
 
     Ok((
         remaining_input,
-        LiteralElement::String(StringElement { elements, position }),
+        ExpressionElement::Literal(LiteralElement::String(StringElement { elements, position })),
     ))
 }

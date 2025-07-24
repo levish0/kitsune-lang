@@ -50,18 +50,23 @@ pub struct UnaryOperation {
 #[derive(Serialize, Debug, Clone)]
 pub struct ParenthesizedElement {
     pub element: Box<ExpressionElement>,
+    #[serde(skip_serializing)]
     pub position: Position,
 }
 #[derive(Serialize, Debug, Clone)]
 pub struct VariableElement {
     pub element: String,
+
+    #[serde(skip_serializing)]
     pub position: Position,
 }
 #[derive(Serialize, Debug, Clone)]
 pub struct ExpressionUnitElement {
-    pub element: String,
+    pub element: Box<ExpressionElement>,
+    #[serde(skip_serializing)]
     pub position: Position,
 }
+
 #[derive(Serialize, Debug, Clone)]
 pub enum ExpressionElement {
     ExpressionUnit(ExpressionUnitElement),

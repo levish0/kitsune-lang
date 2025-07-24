@@ -1,49 +1,63 @@
 [
   {
-    "Literal": {
-      "Number": {
-        "element": "1",
-        "position": {
-          "start_line": 1,
-          "start_column": 1,
-          "end_line": 1,
-          "end_column": 2,
-          "start_offset": 0,
-          "end_offset": 1
-        }
-      }
-    }
-  },
-  {
-    "Literal": {
-      "String": {
-        "elements": [
-          {
-            "PlainString": "aa"
+    "Expression": {
+      "Binary": {
+        "left": {
+          "Binary": {
+            "left": {
+              "ExpressionUnit": {
+                "element": {
+                  "Parenthesized": {
+                    "element": {
+                      "Binary": {
+                        "left": {
+                          "ExpressionUnit": {
+                            "element": {
+                              "Variable": {
+                                "element": "a"
+                              }
+                            }
+                          }
+                        },
+                        "operator": "Add",
+                        "right": {
+                          "ExpressionUnit": {
+                            "element": {
+                              "Variable": {
+                                "element": "b"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "operator": "Multiply",
+            "right": {
+              "ExpressionUnit": {
+                "element": {
+                  "Variable": {
+                    "element": "c"
+                  }
+                }
+              }
+            }
           }
-        ],
-        "position": {
-          "start_line": 1,
-          "start_column": 2,
-          "end_line": 1,
-          "end_column": 6,
-          "start_offset": 1,
-          "end_offset": 5
-        }
-      }
-    }
-  },
-  {
-    "Literal": {
-      "Number": {
-        "element": "333.4",
-        "position": {
-          "start_line": 1,
-          "start_column": 6,
-          "end_line": 1,
-          "end_column": 11,
-          "start_offset": 5,
-          "end_offset": 10
+        },
+        "operator": "Add",
+        "right": {
+          "ExpressionUnit": {
+            "element": {
+              "Literal": {
+                "Number": {
+                  "element": "4"
+                }
+              }
+            }
+          }
         }
       }
     }

@@ -1,10 +1,14 @@
 mod expression_add_sub_concat_op;
+mod expression_comparison;
 mod expression_comparison_op;
 mod expression_factor;
 mod expression_logical_op;
 mod expression_mul_div_mod_op;
 mod expression_parenthesized;
+pub mod expression_parser;
+mod expression_term;
 mod expression_unary;
 mod expression_unary_op;
 mod expression_unit_parser;
 mod expression_variable;
+mod literals;
