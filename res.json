@@ -7,33 +7,485 @@
             "left": {
               "Binary": {
                 "left": {
-                  "ExpressionUnit": {
-                    "element": {
-                      "Parenthesized": {
-                        "element": {
+                  "Binary": {
+                    "left": {
+                      "Binary": {
+                        "left": {
                           "Binary": {
                             "left": {
-                              "ExpressionUnit": {
-                                "element": {
-                                  "Literal": {
-                                    "Number": {
-                                      "element": "1"
+                              "Binary": {
+                                "left": {
+                                  "Binary": {
+                                    "left": {
+                                      "Binary": {
+                                        "left": {
+                                          "Binary": {
+                                            "left": {
+                                              "Binary": {
+                                                "left": {
+                                                  "Binary": {
+                                                    "left": {
+                                                      "Binary": {
+                                                        "left": {
+                                                          "ExpressionUnit": {
+                                                            "element": {
+                                                              "Parenthesized": {
+                                                                "element": {
+                                                                  "Binary": {
+                                                                    "left": {
+                                                                      "ExpressionUnit": {
+                                                                        "element": {
+                                                                          "Literal": {
+                                                                            "Number": {
+                                                                              "element": "1"
+                                                                            }
+                                                                          }
+                                                                        }
+                                                                      }
+                                                                    },
+                                                                    "operator": "Subtract",
+                                                                    "right": {
+                                                                      "ExpressionUnit": {
+                                                                        "element": {
+                                                                          "Literal": {
+                                                                            "Number": {
+                                                                              "element": "3"
+                                                                            }
+                                                                          }
+                                                                        }
+                                                                      }
+                                                                    }
+                                                                  }
+                                                                }
+                                                              }
+                                                            }
+                                                          }
+                                                        },
+                                                        "operator": "Multiply",
+                                                        "right": {
+                                                          "ExpressionUnit": {
+                                                            "element": {
+                                                              "Literal": {
+                                                                "Number": {
+                                                                  "element": "8"
+                                                                }
+                                                              }
+                                                            }
+                                                          }
+                                                        }
+                                                      }
+                                                    },
+                                                    "operator": "Multiply",
+                                                    "right": {
+                                                      "ExpressionUnit": {
+                                                        "element": {
+                                                          "Literal": {
+                                                            "Number": {
+                                                              "element": "4"
+                                                            }
+                                                          }
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                },
+                                                "operator": "Concat",
+                                                "right": {
+                                                  "ExpressionUnit": {
+                                                    "element": {
+                                                      "Literal": {
+                                                        "Number": {
+                                                          "element": "4"
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            },
+                                            "operator": "Add",
+                                            "right": {
+                                              "Binary": {
+                                                "left": {
+                                                  "Binary": {
+                                                    "left": {
+                                                      "ExpressionUnit": {
+                                                        "element": {
+                                                          "Parenthesized": {
+                                                            "element": {
+                                                              "Binary": {
+                                                                "left": {
+                                                                  "ExpressionUnit": {
+                                                                    "element": {
+                                                                      "Literal": {
+                                                                        "Number": {
+                                                                          "element": "1"
+                                                                        }
+                                                                      }
+                                                                    }
+                                                                  }
+                                                                },
+                                                                "operator": "Subtract",
+                                                                "right": {
+                                                                  "ExpressionUnit": {
+                                                                    "element": {
+                                                                      "Literal": {
+                                                                        "Number": {
+                                                                          "element": "3"
+                                                                        }
+                                                                      }
+                                                                    }
+                                                                  }
+                                                                }
+                                                              }
+                                                            }
+                                                          }
+                                                        }
+                                                      }
+                                                    },
+                                                    "operator": "Multiply",
+                                                    "right": {
+                                                      "ExpressionUnit": {
+                                                        "element": {
+                                                          "Literal": {
+                                                            "Number": {
+                                                              "element": "8"
+                                                            }
+                                                          }
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                },
+                                                "operator": "Multiply",
+                                                "right": {
+                                                  "ExpressionUnit": {
+                                                    "element": {
+                                                      "Literal": {
+                                                        "Number": {
+                                                          "element": "4"
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        },
+                                        "operator": "Concat",
+                                        "right": {
+                                          "ExpressionUnit": {
+                                            "element": {
+                                              "Literal": {
+                                                "Number": {
+                                                  "element": "4"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "operator": "Add",
+                                    "right": {
+                                      "Binary": {
+                                        "left": {
+                                          "Binary": {
+                                            "left": {
+                                              "ExpressionUnit": {
+                                                "element": {
+                                                  "Parenthesized": {
+                                                    "element": {
+                                                      "Binary": {
+                                                        "left": {
+                                                          "ExpressionUnit": {
+                                                            "element": {
+                                                              "Literal": {
+                                                                "Number": {
+                                                                  "element": "1"
+                                                                }
+                                                              }
+                                                            }
+                                                          }
+                                                        },
+                                                        "operator": "Subtract",
+                                                        "right": {
+                                                          "ExpressionUnit": {
+                                                            "element": {
+                                                              "Literal": {
+                                                                "Number": {
+                                                                  "element": "3"
+                                                                }
+                                                              }
+                                                            }
+                                                          }
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            },
+                                            "operator": "Multiply",
+                                            "right": {
+                                              "ExpressionUnit": {
+                                                "element": {
+                                                  "Literal": {
+                                                    "Number": {
+                                                      "element": "8"
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        },
+                                        "operator": "Multiply",
+                                        "right": {
+                                          "ExpressionUnit": {
+                                            "element": {
+                                              "Literal": {
+                                                "Number": {
+                                                  "element": "4"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "operator": "Concat",
+                                "right": {
+                                  "ExpressionUnit": {
+                                    "element": {
+                                      "Literal": {
+                                        "Number": {
+                                          "element": "4"
+                                        }
+                                      }
                                     }
                                   }
                                 }
                               }
                             },
-                            "operator": "Subtract",
+                            "operator": "Add",
+                            "right": {
+                              "Binary": {
+                                "left": {
+                                  "Binary": {
+                                    "left": {
+                                      "ExpressionUnit": {
+                                        "element": {
+                                          "Parenthesized": {
+                                            "element": {
+                                              "Binary": {
+                                                "left": {
+                                                  "ExpressionUnit": {
+                                                    "element": {
+                                                      "Literal": {
+                                                        "Number": {
+                                                          "element": "1"
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                },
+                                                "operator": "Subtract",
+                                                "right": {
+                                                  "ExpressionUnit": {
+                                                    "element": {
+                                                      "Literal": {
+                                                        "Number": {
+                                                          "element": "3"
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "operator": "Multiply",
+                                    "right": {
+                                      "ExpressionUnit": {
+                                        "element": {
+                                          "Literal": {
+                                            "Number": {
+                                              "element": "8"
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "operator": "Multiply",
+                                "right": {
+                                  "ExpressionUnit": {
+                                    "element": {
+                                      "Literal": {
+                                        "Number": {
+                                          "element": "4"
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "operator": "Concat",
+                        "right": {
+                          "ExpressionUnit": {
+                            "element": {
+                              "Literal": {
+                                "Number": {
+                                  "element": "4"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "operator": "Add",
+                    "right": {
+                      "Binary": {
+                        "left": {
+                          "Binary": {
+                            "left": {
+                              "ExpressionUnit": {
+                                "element": {
+                                  "Parenthesized": {
+                                    "element": {
+                                      "Binary": {
+                                        "left": {
+                                          "ExpressionUnit": {
+                                            "element": {
+                                              "Literal": {
+                                                "Number": {
+                                                  "element": "1"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        },
+                                        "operator": "Subtract",
+                                        "right": {
+                                          "ExpressionUnit": {
+                                            "element": {
+                                              "Literal": {
+                                                "Number": {
+                                                  "element": "3"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "operator": "Multiply",
                             "right": {
                               "ExpressionUnit": {
                                 "element": {
                                   "Literal": {
                                     "Number": {
-                                      "element": "3"
+                                      "element": "8"
                                     }
                                   }
                                 }
                               }
+                            }
+                          }
+                        },
+                        "operator": "Multiply",
+                        "right": {
+                          "ExpressionUnit": {
+                            "element": {
+                              "Literal": {
+                                "Number": {
+                                  "element": "4"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "operator": "Concat",
+                "right": {
+                  "ExpressionUnit": {
+                    "element": {
+                      "Literal": {
+                        "Number": {
+                          "element": "4"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "operator": "Add",
+            "right": {
+              "Binary": {
+                "left": {
+                  "Binary": {
+                    "left": {
+                      "ExpressionUnit": {
+                        "element": {
+                          "Parenthesized": {
+                            "element": {
+                              "Binary": {
+                                "left": {
+                                  "ExpressionUnit": {
+                                    "element": {
+                                      "Literal": {
+                                        "Number": {
+                                          "element": "1"
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "operator": "Subtract",
+                                "right": {
+                                  "ExpressionUnit": {
+                                    "element": {
+                                      "Literal": {
+                                        "Number": {
+                                          "element": "3"
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "operator": "Multiply",
+                    "right": {
+                      "ExpressionUnit": {
+                        "element": {
+                          "Literal": {
+                            "Number": {
+                              "element": "8"
                             }
                           }
                         }
@@ -47,21 +499,9 @@
                     "element": {
                       "Literal": {
                         "Number": {
-                          "element": "8"
+                          "element": "4"
                         }
                       }
-                    }
-                  }
-                }
-              }
-            },
-            "operator": "Multiply",
-            "right": {
-              "ExpressionUnit": {
-                "element": {
-                  "Literal": {
-                    "Number": {
-                      "element": "4"
                     }
                   }
                 }

@@ -1,8 +1,8 @@
-use serde::Serialize;
 use crate::node::block::block::Block;
 use crate::node::function::parameter::Parameter;
-use crate::node::visibility::Visibility;
+use crate::node::visibility::visibility::Visibility;
 use crate::utils::position::Position;
+use serde::Serialize;
 
 #[derive(Serialize, Debug, Clone)]
 pub struct FunctionDefinition {

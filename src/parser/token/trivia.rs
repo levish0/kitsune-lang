@@ -1,9 +1,9 @@
+use crate::node::trivia::trivia::TriviaElement;
 use crate::utils::span::Span;
 use nom::IResult;
 use nom::Parser;
 use nom::character::complete::multispace1;
 use nom::character::multispace0;
-use crate::node::trivia::trivia::TriviaElement;
 
 pub fn tokens_trivia_parser(input: Span) -> IResult<Span, TriviaElement> {
     println!("trivia");

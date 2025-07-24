@@ -1,8 +1,8 @@
+pub mod block;
 pub mod expression;
+pub mod function;
 pub mod node;
+pub mod statement;
 pub mod trivia;
-mod function;
-mod statement;
-mod block;
-mod variable;
-mod visibility;
+pub mod variable;
+pub mod visibility;

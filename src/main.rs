@@ -3,10 +3,10 @@ use std::fs;
 use std::io::{self, Write};
 use std::time::Instant;
 
+mod codegen;
 mod node;
 mod parser;
 mod utils;
-mod codegen;
 
 fn main() -> io::Result<()> {
     let input_path = "main.kitsune";
