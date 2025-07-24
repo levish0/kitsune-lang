@@ -1,4 +1,4 @@
-use crate::nodes::nodes::KitsuneElement;
+use crate::node::node::KitsuneElement;
 use crate::parser::elements::element_parser;
 use crate::utils::span::Span;
 use nom::IResult;

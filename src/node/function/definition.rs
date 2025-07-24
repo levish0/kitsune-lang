@@ -1,0 +1,15 @@
+use serde::Serialize;
+use crate::node::block::block::Block;
+use crate::node::function::parameter::Parameter;
+use crate::node::visibility::Visibility;
+use crate::utils::position::Position;
+
+#[derive(Serialize, Debug, Clone)]
+pub struct FunctionDefinition {
+    pub visibility: Visibility,
+    pub name: String,
+    pub parameters: Vec<Parameter>,
+    pub return_type: Option<String>,
+    pub body: Block,
+    pub position: Position,
+}

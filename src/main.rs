@@ -1,9 +1,9 @@
-use crate::parser::core::{kitsune_parser, parse_kitsune_lang};
+use crate::parser::core::parse_kitsune_lang;
 use std::fs;
 use std::io::{self, Write};
 use std::time::Instant;
 
-mod nodes;
+mod node;
 mod parser;
 mod utils;
 

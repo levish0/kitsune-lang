@@ -1,8 +1,8 @@
-use crate::nodes::nodes::KitsuneElement;
-use crate::parser::comments::inline_comment::inline_comment_parser;
-use crate::parser::comments::multiline_comment::multiline_comment_parser;
-use crate::parser::expressions::expression_parser::expression_parser;
-use crate::parser::tokens::trivia::tokens_trivia_parser;
+use crate::node::node::KitsuneElement;
+use crate::parser::comment::inline_comment::inline_comment_parser;
+use crate::parser::comment::multiline_comment::multiline_comment_parser;
+use crate::parser::expression::expression_parser::expression_parser;
+use crate::parser::token::trivia::tokens_trivia_parser;
 use crate::utils::span::Span;
 use nom::IResult;
 use nom::Parser;

@@ -1,6 +1,6 @@
-mod comments;
+mod comment;
 pub mod core;
 mod elements;
-mod expressions;
-mod statements;
-mod tokens;
+mod expression;
+mod statement;
+mod token;
