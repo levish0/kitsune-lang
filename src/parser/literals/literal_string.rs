@@ -13,12 +13,8 @@ use nom_locate::position;
 
 pub fn literal_string_parser(input: Span) -> IResult<Span, LiteralElement> {
     let (input, start_pos) = position(input)?;
-    let (input, elements) = complete(delimited(
-        tag("\""),
-        |input| literal_string_core_parser(input),
-        tag("\""),
-    ))
-    .parse(input)?;
+    let (input, elements) =
+        complete(delimited(tag("\""), literal_string_core_parser, tag("\""))).parse(input)?;
     let (remaining_input, end_pos) = position(input)?;
 
     let position = make_position(start_pos, end_pos);

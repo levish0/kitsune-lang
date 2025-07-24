@@ -2,7 +2,7 @@ use crate::nodes::literals::LiteralElement;
 use crate::utils::position::Position;
 use serde::Serialize;
 
-#[derive(Serialize, Debug)]
+#[derive(Serialize, Debug, Clone)]
 pub enum BinaryOperator {
     // 산술 연산
     Add,
@@ -27,38 +27,47 @@ pub enum BinaryOperator {
     Or,
 }
 
-#[derive(Serialize, Debug)]
+#[derive(Serialize, Debug, Clone)]
 pub enum UnaryOperator {
     Plus,  // +x
     Minus, // -x
     Not,   // !x
 }
 
-#[derive(Serialize, Debug)]
+#[derive(Serialize, Debug, Clone)]
 pub struct BinaryOperation {
     pub left: Box<ExpressionElement>,
     pub operator: BinaryOperator,
     pub right: Box<ExpressionElement>,
-    pub position: Position,
 }
 
-#[derive(Serialize, Debug)]
+#[derive(Serialize, Debug, Clone)]
 pub struct UnaryOperation {
     pub operator: UnaryOperator,
     pub operand: Box<ExpressionElement>,
-    pub position: Position,
 }
 
-#[derive(Serialize, Debug)]
+#[derive(Serialize, Debug, Clone)]
+pub struct ParenthesizedElement {
+    pub element: Box<ExpressionElement>,
+    pub position: Position,
+}
+#[derive(Serialize, Debug, Clone)]
 pub struct VariableElement {
     pub element: String,
     pub position: Position,
 }
-
-#[derive(Serialize, Debug)]
+#[derive(Serialize, Debug, Clone)]
+pub struct ExpressionUnitElement {
+    pub element: String,
+    pub position: Position,
+}
+#[derive(Serialize, Debug, Clone)]
 pub enum ExpressionElement {
+    ExpressionUnit(ExpressionUnitElement),
     Literal(LiteralElement),
     Binary(BinaryOperation),
     Unary(UnaryOperation),
+    Parenthesized(ParenthesizedElement),
     Variable(VariableElement),
 }

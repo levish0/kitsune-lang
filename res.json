@@ -32,5 +32,20 @@
         }
       }
     }
+  },
+  {
+    "Literal": {
+      "Number": {
+        "element": "333.4",
+        "position": {
+          "start_line": 1,
+          "start_column": 6,
+          "end_line": 1,
+          "end_column": 11,
+          "start_offset": 5,
+          "end_offset": 10
+        }
+      }
+    }
   }
 ]
