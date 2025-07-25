@@ -10,33 +10,39 @@ extern {
 
     enum Token {
         // 기호
-         "(" => Token::LParen,
-         ")" => Token::RParen,
-         "=" => Token::Eq,
-         ";" => Token::Semicolon,
-         "*" => Token::Star,
-         "/" => Token::Slash,
-         "+" => Token::Plus,
-         "-" => Token::Minus,
-         // 키워드
-         "let" => Token::Let,
-         "const" => Token::Const,
-         "fn" => Token::Fn,
-         "if" => Token::If,
-         "else" => Token::Else,
-         "elif" => Token::ElseIf,
-         "match" => Token::Match,
-         "while" => Token::While,
-         "for" => Token::For,
-         "in" => Token::In,
-         "pub" => Token::Pub,
-         "return" => Token::Return,
-         "true" => Token::True,
-         "false" => Token::False,
+        "{" => Token::LBrace,
+        "}" => Token::RBrace,
+        "(" => Token::LParen,
+        ")" => Token::RParen,
+        "," => Token::Comma,
+        "=" => Token::Eq,
+        ";" => Token::Semicolon,
+        "*" => Token::Star,
+        "/" => Token::Slash,
+        "+" => Token::Plus,
+        "-" => Token::Minus,
+        ":" => Token::Colon,
+        "->" => Token::Arrow,
+        // 키워드
+        "let" => Token::Let,
+        "const" => Token::Const,
+        "fn" => Token::Fn,
+        "if" => Token::If,
+        "else" => Token::Else,
+        "elif" => Token::ElseIf,
+        "match" => Token::Match,
+        "while" => Token::While,
+        "for" => Token::For,
+        "in" => Token::In,
+        "pub" => Token::Pub,
+        "return" => Token::Return,
+        "true" => Token::True,
+        "false" => Token::False,
 
-         "identifier" => Token::Identifier(<String>),
-         "int" => Token::IntegerLiteral(<i64>),
-         "float" => Token::FloatLiteral(<f64>),
+        "identifier" => Token::Identifier(<String>),
+        "int" => Token::IntegerLiteral(<i64>),
+        "float" => Token::FloatLiteral(<f64>),
+        "string" => Token::StringLiteral(<String>),
     }
 }
 
@@ -44,11 +50,66 @@ pub KitsuneScript: Vec<ast::Statement> = {
     <stmts:Statement*> => stmts
 }
 
-
 pub Statement: ast::Statement = {
-  "let" <name:"identifier"> "=" <value:Expression> ";" => {
-    ast::Statement::Variable { name, value }
-  },
+    // 변수 선언
+    "let" <name:"identifier"> "=" <value:Expression> ";" => {
+        ast::Statement::Variable { name, value }
+    },
+    // private (기본) 함수 선언
+    "fn" <name:"identifier"> "(" <params:ParamList?> ")" <ret_type:ReturnType?> <body:Block> => {
+        ast::Statement::Function {
+            visibility: ast::Visibility::Private,
+            name,
+            params: params.unwrap_or_default(),
+            return_type: ret_type,
+            body,
+        }
+    },
+    // public 함수 선언
+    "pub" "fn" <name:"identifier"> "(" <params:ParamList?> ")" <ret_type:ReturnType?> <body:Block> => {
+        ast::Statement::Function {
+            visibility: ast::Visibility::Public,
+            name,
+            params: params.unwrap_or_default(),
+            return_type: ret_type,
+            body,
+        }
+    },
+    // return 문
+    "return" <expr:Expression?> ";" => {
+        ast::Statement::Return(expr)
+    },
+    // 표현식 문
+    <expr:Expression> ";" => {
+        ast::Statement::Expression(expr)
+    },
+}
+
+pub Block: ast::Block = {
+    "{" <stmts:Statement*> "}" => {
+        ast::Block { statements: stmts }
+    }
+}
+
+pub ParamList: Vec<ast::Parameter> = {
+    <param:Parameter> => vec![param],
+    <mut params:ParamList> "," <param:Parameter> => {
+        params.push(param);
+        params
+    },
+}
+
+pub Parameter: ast::Parameter = {
+    <name:"identifier"> <param_type:(":" <"identifier">)?> => {
+        ast::Parameter {
+            name,
+            param_type,
+        }
+    }
+}
+
+pub ReturnType: String = {
+    "->" <ty:"identifier"> => ty
 }
 
 pub Expression: Box<ast::Expression> = {
@@ -56,46 +117,79 @@ pub Expression: Box<ast::Expression> = {
     Term,
 
     #[precedence(level="2")] #[assoc(side="left")]
-     <lhs:Expression> "*" <rhs:Expression> => {
+    <lhs:Expression> "*" <rhs:Expression> => {
         Box::new(ast::Expression::BinaryOperation {
-          lhs,
-          operator: ast::Operator::Mul,
-          rhs
+            lhs,
+            operator: ast::Operator::Mul,
+            rhs
         })
-      },
+    },
     #[precedence(level="2")] #[assoc(side="left")]
     <lhs:Expression> "/" <rhs:Expression> => {
-       Box::new(ast::Expression::BinaryOperation {
-         lhs,
-         operator: ast::Operator::Div,
-         rhs
-       })
-     },
+        Box::new(ast::Expression::BinaryOperation {
+            lhs,
+            operator: ast::Operator::Div,
+            rhs
+        })
+    },
 
     #[precedence(level="3")] #[assoc(side="left")]
     <lhs:Expression> "+" <rhs:Expression> => {
-    Box::new(ast::Expression::BinaryOperation {
-     lhs,
-     operator: ast::Operator::Add,
-     rhs
-    })
+        Box::new(ast::Expression::BinaryOperation {
+            lhs,
+            operator: ast::Operator::Add,
+            rhs
+        })
     },
-     #[precedence(level="3")] #[assoc(side="left")]
-     <lhs:Expression> "-" <rhs:Expression> => {
-       Box::new(ast::Expression::BinaryOperation {
-         lhs,
-         operator: ast::Operator::Sub,
-         rhs
-       })
-     },
+    #[precedence(level="3")] #[assoc(side="left")]
+    <lhs:Expression> "-" <rhs:Expression> => {
+        Box::new(ast::Expression::BinaryOperation {
+            lhs,
+            operator: ast::Operator::Sub,
+            rhs
+        })
+    },
 }
 
 pub Term: Box<ast::Expression> = {
-  <val:"int"> => {
-    Box::new(ast::Expression::Integer(val))
-  },
-  <name:"identifier"> => {
-    Box::new(ast::Expression::Variable(name))
-  },
-  "(" <Expression> ")",
+    <val:"int"> => {
+        Box::new(ast::Expression::Integer(val))
+    },
+    <val:"float"> => {
+        Box::new(ast::Expression::Float(val))
+    },
+    <val:"string"> => {
+        Box::new(ast::Expression::String(val))
+    },
+    "true" => {
+        Box::new(ast::Expression::Boolean(true))
+    },
+    "false" => {
+        Box::new(ast::Expression::Boolean(false))
+    },
+    // 함수 호출
+    <name:"identifier"> "(" <args:ArgList?> ")" => {
+        Box::new(ast::Expression::FunctionCall {
+            name,
+            args: args.unwrap_or_default(),
+        })
+    },
+
+    // 변수
+    <name:"identifier"> => {
+        Box::new(ast::Expression::Variable(name))
+    },
+    "(" <Expression> ")",
+    // 블록 표현식
+    <block:Block> => {
+        Box::new(ast::Expression::Block(block))
+    },
+}
+
+pub ArgList: Vec<Box<ast::Expression>> = {
+    <expr:Expression> => vec![expr],
+    <mut args:ArgList> "," <expr:Expression> => {
+        args.push(expr);
+        args
+    },
 }

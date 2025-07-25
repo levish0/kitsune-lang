@@ -77,51 +77,21 @@ pub enum Token {
     #[token("false")]
     False,
 
-    // 타입
-    // int
-    #[token("i8")]
-    TyI8,
-    #[token("i16")]
-    TyI16,
-    #[token("i32")]
-    TyI32,
-    #[token("i64")]
-    TyI64,
-    #[token("i128")]
-    TyI128,
-    #[token("isize")]
-    TyIsize,
-    // unsigned int
-    #[token("u8")]
-    TyU8,
-    #[token("u16")]
-    TyU16,
-    #[token("u32")]
-    TyU32,
-    #[token("u64")]
-    TyU64,
-    #[token("u128")]
-    TyU128,
-    #[token("usize")]
-    TyUsize,
-    // float
-    #[token("f32")]
-    TyF32,
-    #[token("f64")]
-    TyF64,
-    // boolean
-    #[token("bool")]
-    TyBool,
-    // string
-    #[token("char")]
-    TyChar,
-    #[token("str")]
-    TyStr,
+    #[regex(r#""([^"\\]|\\.)*""#, |lex| {
+        let s = lex.slice();
+        let inner_str = &s[1..s.len() - 1];
+        inner_str.to_string()
+    })]
+    StringLiteral(String),
     // Identifier
-    #[regex(r"[a-zA-Z_][a-zA-Z0-9_]*", |lex| lex.slice().to_string(), priority = 1)]
+    #[regex(r"[a-zA-Z_][a-zA-Z0-9_]*", |lex| {
+    lex.slice().to_string()
+    }, priority = 1)]
     Identifier(String),
     // 부동소수점 리터럴
-    #[regex(r"([0-9]+\.[0-9]+|[0-9]+[eE][+-]?[0-9]+)", |lex| lex.slice().parse())]
+    #[regex(r"([0-9]+\.[0-9]+|[0-9]+[eE][+-]?[0-9]+)", |lex| {
+    lex.slice().parse()
+    })]
     FloatLiteral(f64),
     // 정수 리터럴
     #[regex(r"[0-9]+", |lex| lex.slice().parse())]

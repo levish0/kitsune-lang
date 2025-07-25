@@ -1,2 +1,7 @@
-let x = 3;
-let y = (3+4)*72398239847923;
+fn process(count: usize, rate: f64, active: bool) -> i32 {
+    return count;
+}
+
+pub fn calculate(x: u64, y: u64) -> u128 {
+    return x + y;
+}
