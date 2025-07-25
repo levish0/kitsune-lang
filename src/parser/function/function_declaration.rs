@@ -15,10 +15,13 @@ use nom::{IResult, Parser};
 use nom_locate::position;
 
 pub fn function_declaration_parser(input: Span) -> IResult<Span, FunctionElement> {
+    println!("function_declaration_parser");
     let (input, start_pos) = position(input)?;
     let (input, visibility) = visibility_parser.parse(input)?;
+    println!("function_declaration_parser: visibility = {:?}", visibility);
     let (input, _) = multispace0(input)?;
     let (input, name) = terminated(tag("fn"), multispace1).parse(input)?;
+    println!("function_declaration: fn");
     let (input, name) = identifier_parser.parse(input)?;
     let (input, parameters) = parameter_list_parser(input)?;
     let (input, return_type) = opt(return_type_parser).parse(input)?;

@@ -9,6 +9,7 @@ use nom::character::complete::{char, multispace0};
 use nom::combinator::map;
 
 pub fn statement_parser(input: Span) -> IResult<Span, Statement> {
+    println!("statement");
     let (remaining_input, (stmt, _, _)) = (
         alt((
             variable_declaration_parser,

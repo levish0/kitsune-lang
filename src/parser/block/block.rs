@@ -5,21 +5,22 @@ use crate::utils::span::Span;
 use nom::IResult;
 use nom::Parser;
 use nom::character::complete::{char, multispace0};
+use nom::combinator::complete;
 use nom::multi::many0;
-use nom::sequence::preceded;
+use nom::sequence::{delimited, preceded};
 use nom_locate::position;
 
 pub fn block_parser(input: Span) -> IResult<Span, Block> {
     let (input, start_pos) = position(input)?;
-    let (input, _) = preceded(multispace0, char('{')).parse(input)?;
-    let (input, _) = multispace0(input)?;
+    println!("block");
+    let (input, statements) = complete(delimited(
+        preceded(multispace0, char('{')),
+        many0(preceded(multispace0, statement_parser)),
+        preceded(multispace0, char('}')),
+    ))
+    .parse(input)?;
 
-    let (input, statements) = many0(preceded(multispace0, statement_parser)).parse(input)?;
-
-    let (input, _) = multispace0(input)?;
-    let (input, _) = char('}')(input)?;
     let (remaining_input, end_pos) = position(input)?;
-
     let position = make_position(start_pos, end_pos);
 
     Ok((

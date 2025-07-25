@@ -17,6 +17,7 @@ use nom_locate::position;
 
 pub fn variable_declaration_parser(input: Span) -> IResult<Span, Statement> {
     let (input, start_pos) = position(input)?;
+    println!("variable");
     let (input, declaration_type) = preceded(
         multispace0,
         alt((
@@ -30,7 +31,9 @@ pub fn variable_declaration_parser(input: Span) -> IResult<Span, Statement> {
     )
     .parse(input)?;
 
+    println!("before identifier");
     let (input, name) = identifier_parser.parse(input)?;
+    println!("identifier");
     let (input, type_annotation) = opt(type_annotation_parser).parse(input)?;
 
     // 초기화 값 파싱 (= expression)
