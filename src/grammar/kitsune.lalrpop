@@ -53,7 +53,10 @@ pub KitsuneScript: Vec<ast::Statement> = {
 pub Statement: ast::Statement = {
     // 변수 선언
     "let" <name:"identifier"> "=" <value:Expression> ";" => {
-        ast::Statement::Variable { name, value }
+        ast::Statement::Variable { name, value, is_const: false, }
+    },
+    "const" <name:"identifier"> "=" <value:Expression> ";" => {
+            ast::Statement::Variable { name, value, is_const: true, }
     },
     // private (기본) 함수 선언
     "fn" <name:"identifier"> "(" <params:ParamList?> ")" <ret_type:ReturnType?> <body:Block> => {

@@ -84,14 +84,10 @@ pub enum Token {
     })]
     StringLiteral(String),
     // Identifier
-    #[regex(r"[a-zA-Z_][a-zA-Z0-9_]*", |lex| {
-    lex.slice().to_string()
-    }, priority = 1)]
+    #[regex(r"[a-zA-Z_][a-zA-Z0-9_]*", |lex| lex.slice().to_string(), priority = 1)]
     Identifier(String),
     // 부동소수점 리터럴
-    #[regex(r"([0-9]+\.[0-9]+|[0-9]+[eE][+-]?[0-9]+)", |lex| {
-    lex.slice().parse()
-    })]
+    #[regex(r"([0-9]+\.[0-9]+|[0-9]+[eE][+-]?[0-9]+)", |lex| lex.slice().parse())]
     FloatLiteral(f64),
     // 정수 리터럴
     #[regex(r"[0-9]+", |lex| lex.slice().parse())]

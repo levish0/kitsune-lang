@@ -1,8 +1,11 @@
-#[derive(Clone, Debug, PartialEq)]
+use serde::Serialize;
+
+#[derive(Clone, Debug, PartialEq, Serialize)]
 pub enum Statement {
     Variable {
         name: String,
         value: Box<Expression>,
+        is_const: bool,
     },
     Function {
         visibility: Visibility,
@@ -15,23 +18,23 @@ pub enum Statement {
     Return(Option<Box<Expression>>),
 }
 
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, PartialEq, Serialize)]
 pub enum Visibility {
     Public,
     Private,
 }
 
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, PartialEq, Serialize)]
 pub struct Parameter {
     pub name: String,
     pub param_type: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, PartialEq, Serialize)]
 pub struct Block {
     pub statements: Vec<Statement>,
 }
-#[derive(Clone, Debug, PartialEq)]
+#[derive(Clone, Debug, PartialEq, Serialize)]
 pub enum Expression {
     Integer(i64),
     Float(f64),
@@ -50,7 +53,7 @@ pub enum Expression {
     Block(Block),
 }
 
-#[derive(Clone, Debug, PartialEq)]
+#[derive(Clone, Debug, PartialEq, Serialize)]
 pub enum Operator {
     Add,
     Sub,
