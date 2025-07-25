@@ -1,0 +1,289 @@
+// src/grammar/kitsune.lalrpop
+
+use std::str::FromStr;
+
+grammar;
+
+// 프로그램 전체
+pub Program: Vec<Statement> = {
+    <statements:Statement*> => statements,
+};
+
+// 문장
+pub Statement: Statement = {
+    <func:FunctionDef> => Statement::FunctionDef(func),
+    <stmt:SimpleStatement> => stmt,
+};
+
+// 함수 정의
+FunctionDef: FunctionDef = {
+    "pub" "fn" <name:Identifier> "(" <params:Parameters?> ")" <return_type:("->" <Type>)?> ":" <body:Block> => {
+        FunctionDef {
+            name,
+            params: params.unwrap_or_default(),
+            return_type,
+            body,
+            is_public: true,
+        }
+    },
+    "fn" <name:Identifier> "(" <params:Parameters?> ")" <return_type:("->" <Type>)?> ":" <body:Block> => {
+        FunctionDef {
+            name,
+            params: params.unwrap_or_default(),
+            return_type,
+            body,
+            is_public: false,
+        }
+    },
+};
+
+// 함수 매개변수
+Parameters: Vec<Parameter> = {
+    <param:Parameter> <rest:("," <Parameter>)*> => {
+        let mut params = vec![param];
+        params.extend(rest);
+        params
+    },
+};
+
+Parameter: Parameter = {
+    <name:Identifier> ":" <param_type:Type> => Parameter { name, param_type },
+};
+
+// 타입 정의
+Type: Type = {
+    "i32" => Type::I32,
+    "i64" => Type::I64,
+    "f32" => Type::F32,
+    "f64" => Type::F64,
+    "bool" => Type::Bool,
+    "str" => Type::Str,
+    <name:Identifier> => Type::Custom(name),
+};
+
+// 블록 (단순화된 버전 - 들여쓰기 처리는 별도 렉서 필요)
+Block: Vec<Statement> = {
+    "{" <statements:Statement*> "}" => statements,
+};
+
+// 단순 문장들
+SimpleStatement: Statement = {
+    <assign:Assignment> => Statement::Assignment(assign),
+    <expr:Expression> => Statement::Expression(expr),
+    "return" <expr:Expression?> => Statement::Return(expr),
+};
+
+// 할당문
+Assignment: Assignment = {
+    "let" <name:Identifier> <type_annotation:(":" <Type>)?> "=" <value:Expression> => {
+        Assignment {
+            name,
+            value,
+            type_annotation,
+            is_mutable: true,
+        }
+    },
+    "const" <name:Identifier> <type_annotation:(":" <Type>)?> "=" <value:Expression> => {
+        Assignment {
+            name,
+            value,
+            type_annotation,
+            is_mutable: false,
+        }
+    },
+    <name:Identifier> "=" <value:Expression> => {
+        Assignment {
+            name,
+            value,
+            type_annotation: None,
+            is_mutable: true,
+        }
+    },
+};
+
+// 표현식 (연산자 우선순위 적용)
+pub Expression: Expression = {
+    <left:Expression> "or" <right:AndExpression> => {
+        Expression::BinaryOp {
+            left: Box::new(left),
+            op: BinaryOperator::Or,
+            right: Box::new(right),
+        }
+    },
+    <expr:AndExpression> => expr,
+};
+
+AndExpression: Expression = {
+    <left:AndExpression> "and" <right:EqualityExpression> => {
+        Expression::BinaryOp {
+            left: Box::new(left),
+            op: BinaryOperator::And,
+            right: Box::new(right),
+        }
+    },
+    <expr:EqualityExpression> => expr,
+};
+
+EqualityExpression: Expression = {
+    <left:EqualityExpression> "==" <right:ComparisonExpression> => {
+        Expression::BinaryOp {
+            left: Box::new(left),
+            op: BinaryOperator::Eq,
+            right: Box::new(right),
+        }
+    },
+    <left:EqualityExpression> "!=" <right:ComparisonExpression> => {
+        Expression::BinaryOp {
+            left: Box::new(left),
+            op: BinaryOperator::Ne,
+            right: Box::new(right),
+        }
+    },
+    <expr:ComparisonExpression> => expr,
+};
+
+ComparisonExpression: Expression = {
+    <left:ComparisonExpression> "<" <right:AdditiveExpression> => {
+        Expression::BinaryOp {
+            left: Box::new(left),
+            op: BinaryOperator::Lt,
+            right: Box::new(right),
+        }
+    },
+    <left:ComparisonExpression> ">" <right:AdditiveExpression> => {
+        Expression::BinaryOp {
+            left: Box::new(left),
+            op: BinaryOperator::Gt,
+            right: Box::new(right),
+        }
+    },
+    <left:ComparisonExpression> "<=" <right:AdditiveExpression> => {
+        Expression::BinaryOp {
+            left: Box::new(left),
+            op: BinaryOperator::Le,
+            right: Box::new(right),
+        }
+    },
+    <left:ComparisonExpression> ">=" <right:AdditiveExpression> => {
+        Expression::BinaryOp {
+            left: Box::new(left),
+            op: BinaryOperator::Ge,
+            right: Box::new(right),
+        }
+    },
+    <expr:AdditiveExpression> => expr,
+};
+
+AdditiveExpression: Expression = {
+    <left:AdditiveExpression> "+" <right:MultiplicativeExpression> => {
+        Expression::BinaryOp {
+            left: Box::new(left),
+            op: BinaryOperator::Add,
+            right: Box::new(right),
+        }
+    },
+    <left:AdditiveExpression> "-" <right:MultiplicativeExpression> => {
+        Expression::BinaryOp {
+            left: Box::new(left),
+            op: BinaryOperator::Sub,
+            right: Box::new(right),
+        }
+    },
+    <expr:MultiplicativeExpression> => expr,
+};
+
+MultiplicativeExpression: Expression = {
+    <left:MultiplicativeExpression> "*" <right:UnaryExpression> => {
+        Expression::BinaryOp {
+            left: Box::new(left),
+            op: BinaryOperator::Mul,
+            right: Box::new(right),
+        }
+    },
+    <left:MultiplicativeExpression> "/" <right:UnaryExpression> => {
+        Expression::BinaryOp {
+            left: Box::new(left),
+            op: BinaryOperator::Div,
+            right: Box::new(right),
+        }
+    },
+    <left:MultiplicativeExpression> "%" <right:UnaryExpression> => {
+        Expression::BinaryOp {
+            left: Box::new(left),
+            op: BinaryOperator::Mod,
+            right: Box::new(right),
+        }
+    },
+    <expr:UnaryExpression> => expr,
+};
+
+UnaryExpression: Expression = {
+    "!" <expr:UnaryExpression> => {
+        Expression::UnaryOp {
+            op: UnaryOperator::Not,
+            operand: Box::new(expr),
+        }
+    },
+    "-" <expr:UnaryExpression> => {
+        Expression::UnaryOp {
+            op: UnaryOperator::Neg,
+            operand: Box::new(expr),
+        }
+    },
+    <expr:PrimaryExpression> => expr,
+};
+
+PrimaryExpression: Expression = {
+    <literal:Literal> => Expression::Literal(literal),
+    <name:Identifier> => Expression::Variable(name),
+    <call:FunctionCall> => Expression::FunctionCall(call),
+    "(" <expr:Expression> ")" => expr,
+};
+
+// 함수 호출
+FunctionCall: FunctionCall = {
+    <name:Identifier> "(" <args:Arguments?> ")" => {
+        FunctionCall {
+            name,
+            args: args.unwrap_or_default(),
+        }
+    },
+};
+
+Arguments: Vec<Expression> = {
+    <expr:Expression> <rest:("," <Expression>)*> => {
+        let mut args = vec![expr];
+        args.extend(rest);
+        args
+    },
+};
+
+// 리터럴
+Literal: Literal = {
+    <n:Integer> => Literal::Integer(n),
+    <f:Float> => Literal::Float(f),
+    <s:String> => Literal::String(s),
+    <b:Boolean> => Literal::Boolean(b),
+};
+
+// 토큰 정의
+Integer: i64 = {
+    r"[0-9]+" => i64::from_str(<>).unwrap(),
+};
+
+Float: f64 = {
+    r"[0-9]+\.[0-9]+" => f64::from_str(<>).unwrap(),
+};
+
+String: String = {
+    r#""[^"]*""# => <>[1..<>.len()-1].to_string(),
+};
+
+Boolean: bool = {
+    "True" => true,
+    "False" => false,
+};
+
+Identifier: String = {
+    r"[a-zA-Z_][a-zA-Z0-9_]*" => <>.to_string(),
+};
