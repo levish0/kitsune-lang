@@ -1,8 +1,16 @@
-use kitsune_script::kitsune;
+use logos::Logos;
+use kitsune_script::lexer::tokens::Token;
 
 fn main() {
-    match kitsune::ExprParser::new().parse("2 + 3 * 4") {
-        Ok(v)  => println!("Result: {v}"),
-        Err(e) => println!("Parse error: {e:?}"),
+    let source = r#"
+        pub fn add(x: i32, y: i32) -> i32 {
+            return x + y;
+        }
+    "#;
+
+    let lexer = Token::lexer(source);
+
+    for token in lexer {
+        println!("{:?}", token);
     }
 }
