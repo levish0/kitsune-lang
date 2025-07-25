@@ -46,6 +46,10 @@ pub enum Token {
     Arrow,
     #[token(":")]
     Colon,
+    #[token("..=")]
+    RangeInclusive,
+    #[token("..")]
+    Range,
 
     // 키워드
     #[token("let")]

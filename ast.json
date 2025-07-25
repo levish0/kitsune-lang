@@ -22,14 +22,30 @@
   {
     "While": {
       "condition": {
-        "BinaryOperation": {
-          "lhs": {
-            "Integer": 4
+        "Range": {
+          "start": {
+            "BinaryOperation": {
+              "lhs": {
+                "Integer": 4
+              },
+              "operator": "Add",
+              "rhs": {
+                "Integer": 3
+              }
+            }
           },
-          "operator": "Add",
-          "rhs": {
-            "Integer": 3
-          }
+          "end": {
+            "BinaryOperation": {
+              "lhs": {
+                "Integer": 5
+              },
+              "operator": "Mul",
+              "rhs": {
+                "Integer": 20
+              }
+            }
+          },
+          "inclusive": true
         }
       },
       "body": {
@@ -39,6 +55,65 @@
               "name": "x",
               "value": {
                 "Integer": 4
+              }
+            }
+          },
+          {
+            "Let": {
+              "name": "k",
+              "value": {
+                "Boolean": true
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "While": {
+      "condition": {
+        "Range": {
+          "start": {
+            "BinaryOperation": {
+              "lhs": {
+                "Integer": 4
+              },
+              "operator": "Add",
+              "rhs": {
+                "Integer": 3
+              }
+            }
+          },
+          "end": {
+            "BinaryOperation": {
+              "lhs": {
+                "Integer": 5
+              },
+              "operator": "Mul",
+              "rhs": {
+                "Integer": 20
+              }
+            }
+          },
+          "inclusive": false
+        }
+      },
+      "body": {
+        "statements": [
+          {
+            "Let": {
+              "name": "x",
+              "value": {
+                "Integer": 4
+              }
+            }
+          },
+          {
+            "Let": {
+              "name": "k",
+              "value": {
+                "Boolean": true
               }
             }
           }

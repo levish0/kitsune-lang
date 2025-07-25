@@ -1,6 +1,11 @@
 for i in (3) {
     let x = 3;
 }
-while (4+3) {
+while (4+3..=5*20) {
     let x=4;
+    let k = true;
+}
+while (4+3..5*20) {
+    let x=4;
+    let k = true;
 }

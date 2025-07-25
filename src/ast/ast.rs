@@ -62,6 +62,11 @@ pub enum Expression {
         name: String,
         args: Vec<Box<Expression>>,
     },
+    Range {
+        start: Box<Expression>,
+        end: Box<Expression>,
+        inclusive: bool,
+    },
     Block(Block),
 }
 

@@ -15,6 +15,8 @@ extern {
         "(" => Token::LParen,
         ")" => Token::RParen,
         "," => Token::Comma,
+        "..=" => Token::RangeInclusive,
+        ".." => Token::Range,
         "=" => Token::Eq,
         ";" => Token::Semicolon,
         "*" => Token::Star,
@@ -131,43 +133,50 @@ pub ReturnType: String = {
 }
 
 pub Expression: Box<ast::Expression> = {
-    #[precedence(level="1")]
-    Term,
+    <range:RangeExpr> => range,
+};
 
-    #[precedence(level="2")] #[assoc(side="left")]
-    <lhs:Expression> "*" <rhs:Expression> => {
-        Box::new(ast::Expression::BinaryOperation {
-            lhs,
-            operator: ast::Operator::Mul,
-            rhs
-        })
-    },
-    #[precedence(level="2")] #[assoc(side="left")]
-    <lhs:Expression> "/" <rhs:Expression> => {
-        Box::new(ast::Expression::BinaryOperation {
-            lhs,
-            operator: ast::Operator::Div,
-            rhs
-        })
-    },
+pub RangeExpr: Box<ast::Expression> = {
+    <start:AdditiveExpr> "..=" <end:AdditiveExpr> => Box::new(ast::Expression::Range {
+        start,
+        end,
+        inclusive: true,
+    }),
+    <start:AdditiveExpr> ".." <end:AdditiveExpr> => Box::new(ast::Expression::Range {
+        start,
+        end,
+        inclusive: false,
+    }),
+    <add:AdditiveExpr> => add,
+};
 
-    #[precedence(level="3")] #[assoc(side="left")]
-    <lhs:Expression> "+" <rhs:Expression> => {
-        Box::new(ast::Expression::BinaryOperation {
-            lhs,
-            operator: ast::Operator::Add,
-            rhs
-        })
-    },
-    #[precedence(level="3")] #[assoc(side="left")]
-    <lhs:Expression> "-" <rhs:Expression> => {
-        Box::new(ast::Expression::BinaryOperation {
-            lhs,
-            operator: ast::Operator::Sub,
-            rhs
-        })
-    },
-}
+pub AdditiveExpr: Box<ast::Expression> = {
+    <lhs:AdditiveExpr> "+" <rhs:MultiplicativeExpr> => Box::new(ast::Expression::BinaryOperation {
+        lhs,
+        operator: ast::Operator::Add,
+        rhs,
+    }),
+    <lhs:AdditiveExpr> "-" <rhs:MultiplicativeExpr> => Box::new(ast::Expression::BinaryOperation {
+        lhs,
+        operator: ast::Operator::Sub,
+        rhs,
+    }),
+    <mul:MultiplicativeExpr> => mul,
+};
+
+pub MultiplicativeExpr: Box<ast::Expression> = {
+    <lhs:MultiplicativeExpr> "*" <rhs:Term> => Box::new(ast::Expression::BinaryOperation {
+        lhs,
+        operator: ast::Operator::Mul,
+        rhs,
+    }),
+    <lhs:MultiplicativeExpr> "/" <rhs:Term> => Box::new(ast::Expression::BinaryOperation {
+        lhs,
+        operator: ast::Operator::Div,
+        rhs,
+    }),
+    <term:Term> => term,
+};
 
 pub Term: Box<ast::Expression> = {
     <val:"int"> => {
