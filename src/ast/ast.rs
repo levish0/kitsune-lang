@@ -2,10 +2,13 @@ use serde::Serialize;
 
 #[derive(Clone, Debug, PartialEq, Serialize)]
 pub enum Statement {
-    Variable {
+    Let {
         name: String,
         value: Box<Expression>,
-        is_const: bool,
+    },
+    Const {
+        name: String,
+        value: Box<Expression>,
     },
     Function {
         visibility: Visibility,

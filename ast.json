@@ -21,25 +21,23 @@
       "body": {
         "statements": [
           {
-            "Variable": {
+            "Let": {
               "name": "x",
               "value": {
                 "Integer": 3
-              },
-              "is_const": false
+              }
             }
           },
           {
-            "Variable": {
+            "Const": {
               "name": "y",
               "value": {
                 "Integer": 4
-              },
-              "is_const": true
+              }
             }
           },
           {
-            "Variable": {
+            "Let": {
               "name": "z",
               "value": {
                 "BinaryOperation": {
@@ -51,47 +49,12 @@
                     "Variable": "y"
                   }
                 }
-              },
-              "is_const": false
+              }
             }
           },
           {
             "Return": {
               "Variable": "count"
-            }
-          }
-        ]
-      }
-    }
-  },
-  {
-    "Function": {
-      "visibility": "Public",
-      "name": "calculate",
-      "params": [
-        {
-          "name": "x",
-          "param_type": "u64"
-        },
-        {
-          "name": "y",
-          "param_type": "u64"
-        }
-      ],
-      "return_type": "u128",
-      "body": {
-        "statements": [
-          {
-            "Return": {
-              "BinaryOperation": {
-                "lhs": {
-                  "Variable": "x"
-                },
-                "operator": "Add",
-                "rhs": {
-                  "Variable": "y"
-                }
-              }
             }
           }
         ]

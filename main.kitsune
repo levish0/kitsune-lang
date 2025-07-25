@@ -4,7 +4,3 @@ fn process(count: usize, rate: f64, active: bool) -> i32 {
     let z = x+y;
     return count;
 }
-
-pub fn calculate(x: u64, y: u64) -> u128 {
-    return x + y;
-}
