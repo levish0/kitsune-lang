@@ -4,6 +4,7 @@ use crate::parser::expression::unit::expression_parenthesized::expression_parent
 use crate::parser::expression::unit::expression_variable::expression_variable_parser;
 use crate::parser::expression::unit::literal::literal_number::literal_number_parser;
 use crate::parser::expression::unit::literal::literal_string::literal_string_parser;
+use crate::parser::function::function_call::function_call;
 use crate::utils::position::make_position;
 use crate::utils::span::Span;
 use nom::branch::alt;
@@ -20,6 +21,7 @@ pub fn expression_unit_parser(input: Span) -> IResult<Span, ExpressionElement> {
             expression_parenthesized_parser,
             literal_number_parser,
             literal_string_parser,
+            function_call,
             expression_variable_parser,
         )),
     )

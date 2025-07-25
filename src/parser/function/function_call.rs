@@ -1,6 +1,7 @@
 use crate::node::expression::expression::ExpressionElement;
 use crate::node::function::call::FunctionCall;
 use crate::parser::expression::expression_parser::expression_parser;
+use crate::parser::name::identifier::identifier_parser;
 use crate::utils::position::make_position;
 use crate::utils::span::Span;
 use nom::character::complete::{alpha1, char, multispace0};
@@ -13,7 +14,7 @@ use nom_locate::position;
 pub fn function_call(input: Span) -> IResult<Span, ExpressionElement> {
     let (input, start_pos) = position(input)?;
     let (input, (function_name, arguments)) = (
-        preceded(multispace0, alpha1),
+        preceded(multispace0, identifier_parser),
         complete(delimited(
             preceded(multispace0, char('(')),
             separated_list0(
@@ -26,7 +27,6 @@ pub fn function_call(input: Span) -> IResult<Span, ExpressionElement> {
         .parse(input)?;
     let (remaining_input, end_pos) = position(input)?;
 
-    let function_name = function_name.fragment().to_string();
     let position = make_position(start_pos, end_pos);
 
     Ok((

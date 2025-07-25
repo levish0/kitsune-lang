@@ -1,2 +1,2 @@
 pub mod type_annotation;
-mod type_return;
+pub mod type_return;

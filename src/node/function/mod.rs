@@ -1,3 +1,3 @@
 pub mod call;
-mod definition;
-mod parameter;
+pub mod definition;
+pub mod function;

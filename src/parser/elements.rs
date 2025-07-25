@@ -8,12 +8,15 @@ use nom::IResult;
 use nom::Parser;
 use nom::branch::alt;
 use nom::multi::many1;
+use crate::parser::function::function_parser::function_parser;
 
 pub fn element_parser(input: Span) -> IResult<Span, Vec<KitsuneElement>> {
     many1(alt((
         // Comment
         multiline_comment_parser.map(KitsuneElement::Trivia),
         inline_comment_parser.map(KitsuneElement::Trivia),
+        // Function
+        function_parser.map(KitsuneElement::Function),
         // Expression
         expression_parser.map(KitsuneElement::Expression),
         // Trivia

@@ -1,3 +1,2 @@
-let x;
-let y;
-const variable = 4000;
+let x=3
+let y=4

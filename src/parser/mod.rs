@@ -1,8 +1,10 @@
+mod block;
 mod comment;
 pub mod core;
 mod elements;
 mod expression;
 mod function;
+mod name;
 mod statement;
 mod token;
 pub mod r#type;

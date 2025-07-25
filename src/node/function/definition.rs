@@ -1,5 +1,5 @@
 use crate::node::block::block::Block;
-use crate::node::function::parameter::Parameter;
+use crate::node::variable::parameter::Parameter;
 use crate::node::visibility::visibility::Visibility;
 use crate::utils::position::Position;
 use serde::Serialize;
