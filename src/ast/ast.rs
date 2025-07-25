@@ -10,6 +10,15 @@ pub enum Statement {
         name: String,
         value: Box<Expression>,
     },
+    For {
+        var_name: String,
+        iterable: Box<Expression>,
+        body: Block,
+    },
+    While {
+        condition: Box<Expression>,
+        body: Block,
+    },
     Function {
         visibility: Visibility,
         name: String,

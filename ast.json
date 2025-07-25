@@ -1,23 +1,10 @@
 [
   {
-    "Function": {
-      "visibility": "Private",
-      "name": "process",
-      "params": [
-        {
-          "name": "count",
-          "param_type": "usize"
-        },
-        {
-          "name": "rate",
-          "param_type": "f64"
-        },
-        {
-          "name": "active",
-          "param_type": "bool"
-        }
-      ],
-      "return_type": "i32",
+    "For": {
+      "var_name": "i",
+      "iterable": {
+        "Integer": 3
+      },
       "body": {
         "statements": [
           {
@@ -27,34 +14,32 @@
                 "Integer": 3
               }
             }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "While": {
+      "condition": {
+        "BinaryOperation": {
+          "lhs": {
+            "Integer": 4
           },
+          "operator": "Add",
+          "rhs": {
+            "Integer": 3
+          }
+        }
+      },
+      "body": {
+        "statements": [
           {
-            "Const": {
-              "name": "y",
+            "Let": {
+              "name": "x",
               "value": {
                 "Integer": 4
               }
-            }
-          },
-          {
-            "Let": {
-              "name": "z",
-              "value": {
-                "BinaryOperation": {
-                  "lhs": {
-                    "Variable": "x"
-                  },
-                  "operator": "Add",
-                  "rhs": {
-                    "Variable": "y"
-                  }
-                }
-              }
-            }
-          },
-          {
-            "Return": {
-              "Variable": "count"
             }
           }
         ]

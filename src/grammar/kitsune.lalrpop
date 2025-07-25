@@ -78,6 +78,21 @@ pub Statement: ast::Statement = {
             body,
         }
     },
+    // for 문
+    "for" <var_name:"identifier"> "in" <iterable:Expression> <body:Block> => {
+        ast::Statement::For {
+            var_name,
+            iterable,
+            body,
+        }
+    },
+    // while 문
+    "while" <condition:Expression> <body:Block> => {
+        ast::Statement::While {
+            condition,
+            body,
+        }
+    },
     // return 문
     "return" <expr:Expression?> ";" => {
         ast::Statement::Return(expr)

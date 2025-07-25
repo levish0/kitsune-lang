@@ -1,6 +1,6 @@
-fn process(count: usize, rate: f64, active: bool) -> i32 {
+for i in (3) {
     let x = 3;
-    const y = 4;
-    let z = x+y;
-    return count;
+}
+while (4+3) {
+    let x=4;
 }
