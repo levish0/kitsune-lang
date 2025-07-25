@@ -1,16 +1,13 @@
-use logos::Logos;
-use kitsune_script::lexer::tokens::Token;
+use kitsune_script::lexer::kitsune_lexer::{Lexer};
 
 fn main() {
     let source = r#"
-        pub fn add(x: i32, y: i32) -> i32 {
+        pub fn add(xxx: i32, y: i32) -> i32 {
             return x + y;
         }
     "#;
 
-    let lexer = Token::lexer(source);
+    let lexer = Lexer::new(&source);
 
-    for token in lexer {
-        println!("{:?}", token);
-    }
+    println!("{:?}", lexer.collect::<Vec<_>>());
 }
