@@ -1,13 +1,15 @@
-use kitsune_script::lexer::kitsune_lexer::{Lexer};
+use kitsune_script::grammar::kitsune::KitsuneScriptParser;
+use kitsune_script::lexer::kitsune_lexer::Lexer;
+use std::fs;
 
-fn main() {
-    let source = r#"
-        pub fn add(xxx: i32, y: i32) -> i32 {
-            return x + y;
-        }
-    "#;
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let source = fs::read_to_string("main.kitsune")?;
 
     let lexer = Lexer::new(&source);
+    let parser = KitsuneScriptParser::new();
+    let ast = parser.parse(lexer)?;
 
-    println!("{:?}", lexer.collect::<Vec<_>>());
+    println!("{:#?}", ast);
+
+    Ok(())
 }

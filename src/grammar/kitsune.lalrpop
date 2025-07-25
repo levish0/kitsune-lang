@@ -1,5 +1,101 @@
-use crate::lexer::tokens::Token;
+use crate::lexer::{Token, LexicalError};
+use crate::ast::ast;
 use std::str::FromStr;
 
 grammar;
 
+extern {
+    type Location = usize;
+    type Error = LexicalError;
+
+    enum Token {
+        // 기호
+         "(" => Token::LParen,
+         ")" => Token::RParen,
+         "=" => Token::Eq,
+         ";" => Token::Semicolon,
+         "*" => Token::Star,
+         "/" => Token::Slash,
+         "+" => Token::Plus,
+         "-" => Token::Minus,
+         // 키워드
+         "let" => Token::Let,
+         "const" => Token::Const,
+         "fn" => Token::Fn,
+         "if" => Token::If,
+         "else" => Token::Else,
+         "elif" => Token::ElseIf,
+         "match" => Token::Match,
+         "while" => Token::While,
+         "for" => Token::For,
+         "in" => Token::In,
+         "pub" => Token::Pub,
+         "return" => Token::Return,
+         "true" => Token::True,
+         "false" => Token::False,
+
+         "identifier" => Token::Identifier(<String>),
+         "int" => Token::IntegerLiteral(<i64>),
+         "float" => Token::FloatLiteral(<f64>),
+    }
+}
+
+pub KitsuneScript: Vec<ast::Statement> = {
+    <stmts:Statement*> => stmts
+}
+
+
+pub Statement: ast::Statement = {
+  "let" <name:"identifier"> "=" <value:Expression> ";" => {
+    ast::Statement::Variable { name, value }
+  },
+}
+
+pub Expression: Box<ast::Expression> = {
+    #[precedence(level="1")]
+    Term,
+
+    #[precedence(level="2")] #[assoc(side="left")]
+     <lhs:Expression> "*" <rhs:Expression> => {
+        Box::new(ast::Expression::BinaryOperation {
+          lhs,
+          operator: ast::Operator::Mul,
+          rhs
+        })
+      },
+    #[precedence(level="2")] #[assoc(side="left")]
+    <lhs:Expression> "/" <rhs:Expression> => {
+       Box::new(ast::Expression::BinaryOperation {
+         lhs,
+         operator: ast::Operator::Div,
+         rhs
+       })
+     },
+
+    #[precedence(level="3")] #[assoc(side="left")]
+    <lhs:Expression> "+" <rhs:Expression> => {
+    Box::new(ast::Expression::BinaryOperation {
+     lhs,
+     operator: ast::Operator::Add,
+     rhs
+    })
+    },
+     #[precedence(level="3")] #[assoc(side="left")]
+     <lhs:Expression> "-" <rhs:Expression> => {
+       Box::new(ast::Expression::BinaryOperation {
+         lhs,
+         operator: ast::Operator::Sub,
+         rhs
+       })
+     },
+}
+
+pub Term: Box<ast::Expression> = {
+  <val:"int"> => {
+    Box::new(ast::Expression::Integer(val))
+  },
+  <name:"identifier"> => {
+    Box::new(ast::Expression::Variable(name))
+  },
+  "(" <Expression> ")",
+}

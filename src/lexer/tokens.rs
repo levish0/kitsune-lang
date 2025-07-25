@@ -1,7 +1,8 @@
 use logos::Logos;
+use std::fmt;
 use std::num::{ParseFloatError, ParseIntError};
 
-#[derive(Logos, Debug, PartialEq)]
+#[derive(Logos, Debug, Clone, PartialEq)]
 #[logos(error = LexicalError)]
 pub enum Token {
     // 기호
@@ -62,7 +63,7 @@ pub enum Token {
     #[token("match")]
     Match,
     #[token("while")]
-    TyWhile,
+    While,
     #[token("for")]
     For,
     #[token("in")]
@@ -147,5 +148,21 @@ impl From<ParseIntError> for LexicalError {
 impl From<ParseFloatError> for LexicalError {
     fn from(err: ParseFloatError) -> Self {
         LexicalError::InvalidFloat(err)
+    }
+}
+
+impl fmt::Display for LexicalError {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            LexicalError::InvalidInteger(e) => write!(f, "invalid integer literal: {e}"),
+            LexicalError::InvalidFloat(e) => write!(f, "invalid float literal: {e}"),
+            LexicalError::InvalidToken => write!(f, "invalid token"),
+        }
+    }
+}
+
+impl fmt::Display for Token {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "{:?}", self)
     }
 }
