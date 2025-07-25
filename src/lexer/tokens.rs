@@ -70,6 +70,12 @@ pub enum Token {
     Match,
     #[token("while")]
     While,
+    #[token("loop")]
+    Loop,
+    #[token("continue")]
+    Continue,
+    #[token("break")]
+    Break,
     #[token("for")]
     For,
     #[token("in")]
