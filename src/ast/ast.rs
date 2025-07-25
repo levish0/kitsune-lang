@@ -53,6 +53,10 @@ pub enum Expression {
     String(String),
     Boolean(bool),
     Variable(String),
+    UnaryOperation {
+        operator: UnaryOperator,
+        expr: Box<Expression>,
+    },
     BinaryOperation {
         lhs: Box<Expression>,
         operator: Operator,
@@ -69,7 +73,12 @@ pub enum Expression {
     },
     Block(Block),
 }
-
+#[derive(Clone, Debug, PartialEq, Serialize)]
+pub enum UnaryOperator {
+    Neg, // -
+    Pos, // +
+    Not, // !
+}
 #[derive(Clone, Debug, PartialEq, Serialize)]
 pub enum Operator {
     Add,

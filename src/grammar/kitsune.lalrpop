@@ -19,6 +19,7 @@ extern {
         ".." => Token::Range,
         "=" => Token::Eq,
         ";" => Token::Semicolon,
+        "!" => Token::Bang,
         "*" => Token::Star,
         "/" => Token::Slash,
         "+" => Token::Plus,
@@ -135,7 +136,7 @@ pub ReturnType: String = {
 pub Expression: Box<ast::Expression> = {
     <range:RangeExpr> => range,
 };
-
+// 제일 낮은 우선순위
 pub RangeExpr: Box<ast::Expression> = {
     <start:AdditiveExpr> "..=" <end:AdditiveExpr> => Box::new(ast::Expression::Range {
         start,
@@ -149,7 +150,7 @@ pub RangeExpr: Box<ast::Expression> = {
     }),
     <add:AdditiveExpr> => add,
 };
-
+// 그 다음 우선순위 (1)
 pub AdditiveExpr: Box<ast::Expression> = {
     <lhs:AdditiveExpr> "+" <rhs:MultiplicativeExpr> => Box::new(ast::Expression::BinaryOperation {
         lhs,
@@ -163,21 +164,37 @@ pub AdditiveExpr: Box<ast::Expression> = {
     }),
     <mul:MultiplicativeExpr> => mul,
 };
-
+// 그 다음 우선순위 (2)
 pub MultiplicativeExpr: Box<ast::Expression> = {
-    <lhs:MultiplicativeExpr> "*" <rhs:Term> => Box::new(ast::Expression::BinaryOperation {
+    <lhs:MultiplicativeExpr> "*" <rhs:UnaryExpr> => Box::new(ast::Expression::BinaryOperation {
         lhs,
         operator: ast::Operator::Mul,
         rhs,
     }),
-    <lhs:MultiplicativeExpr> "/" <rhs:Term> => Box::new(ast::Expression::BinaryOperation {
+    <lhs:MultiplicativeExpr> "/" <rhs:UnaryExpr> => Box::new(ast::Expression::BinaryOperation {
         lhs,
         operator: ast::Operator::Div,
         rhs,
     }),
+    <unary:UnaryExpr> => unary,
+};
+// 그 다음 우선순위 (3)
+pub UnaryExpr: Box<ast::Expression> = {
+    "-" <expr:UnaryExpr> => Box::new(ast::Expression::UnaryOperation {
+        operator: ast::UnaryOperator::Neg,
+        expr,
+    }),
+    "+" <expr:UnaryExpr> => Box::new(ast::Expression::UnaryOperation {
+        operator: ast::UnaryOperator::Pos,
+        expr,
+    }),
+    "!" <expr:UnaryExpr> => Box::new(ast::Expression::UnaryOperation {
+        operator: ast::UnaryOperator::Not,
+        expr,
+    }),
     <term:Term> => term,
 };
-
+// 그 다음 우선순위
 pub Term: Box<ast::Expression> = {
     <val:"int"> => {
         Box::new(ast::Expression::Integer(val))

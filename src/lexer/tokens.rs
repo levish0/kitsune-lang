@@ -18,6 +18,8 @@ pub enum Token {
     Comma,
     #[token(";")]
     Semicolon,
+    #[token("!")]
+    Bang,
     #[token("+")]
     Plus,
     #[token("-")]
