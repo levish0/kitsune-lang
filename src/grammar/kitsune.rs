@@ -1,7 +1,7 @@
 // auto-generated: "lalrpop 0.22.2"
 // sha3: b9f4e52aa0db4f84fea70ba1cb0b5169e2507480ada9550e60375243046458ed
-use crate::lexer::{Token, LexicalError};
 use crate::ast::ast;
+use crate::lexer::{LexicalError, Token};
 use std::str::FromStr;
 #[allow(unused_extern_crates)]
 extern crate lalrpop_util as __lalrpop_util;
@@ -95012,293 +95012,322 @@ mod __parse__UnaryExpr {
 #[allow(unused_imports)]
 pub use self::__parse__UnaryExpr::UnaryExprParser;
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action0<
->(
-    (_, __0, _): (usize, Vec<ast::Statement>, usize),
-) -> Vec<ast::Statement>
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action0((_, __0, _): (usize, Vec<ast::Statement>, usize)) -> Vec<ast::Statement> {
     __0
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action1<
->(
-    (_, __0, _): (usize, ast::Statement, usize),
-) -> ast::Statement
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action1((_, __0, _): (usize, ast::Statement, usize)) -> ast::Statement {
     __0
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action2<
->(
-    (_, __0, _): (usize, ast::AssignOperator, usize),
-) -> ast::AssignOperator
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action2((_, __0, _): (usize, ast::AssignOperator, usize)) -> ast::AssignOperator {
     __0
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action3<
->(
-    (_, __0, _): (usize, ast::Block, usize),
-) -> ast::Block
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action3((_, __0, _): (usize, ast::Block, usize)) -> ast::Block {
     __0
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action4<
->(
-    (_, __0, _): (usize, Vec<ast::Parameter>, usize),
-) -> Vec<ast::Parameter>
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action4((_, __0, _): (usize, Vec<ast::Parameter>, usize)) -> Vec<ast::Parameter> {
     __0
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action5<
->(
-    (_, __0, _): (usize, ast::Parameter, usize),
-) -> ast::Parameter
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action5((_, __0, _): (usize, ast::Parameter, usize)) -> ast::Parameter {
     __0
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action6<
->(
-    (_, __0, _): (usize, String, usize),
-) -> String
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action6((_, __0, _): (usize, String, usize)) -> String {
     __0
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action7<
->(
-    (_, __0, _): (usize, Box<ast::Expression>, usize),
-) -> Box<ast::Expression>
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action7((_, __0, _): (usize, Box<ast::Expression>, usize)) -> Box<ast::Expression> {
     __0
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action8<
->(
-    (_, __0, _): (usize, Box<ast::Expression>, usize),
-) -> Box<ast::Expression>
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action8((_, __0, _): (usize, Box<ast::Expression>, usize)) -> Box<ast::Expression> {
     __0
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action9<
->(
-    (_, __0, _): (usize, Box<ast::Expression>, usize),
-) -> Box<ast::Expression>
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action9((_, __0, _): (usize, Box<ast::Expression>, usize)) -> Box<ast::Expression> {
     __0
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action10<
->(
-    (_, __0, _): (usize, Box<ast::Expression>, usize),
-) -> Box<ast::Expression>
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action10((_, __0, _): (usize, Box<ast::Expression>, usize)) -> Box<ast::Expression> {
     __0
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action11<
->(
-    (_, __0, _): (usize, Box<ast::Expression>, usize),
-) -> Box<ast::Expression>
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action11((_, __0, _): (usize, Box<ast::Expression>, usize)) -> Box<ast::Expression> {
     __0
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action12<
->(
-    (_, __0, _): (usize, Box<ast::Expression>, usize),
-) -> Box<ast::Expression>
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action12((_, __0, _): (usize, Box<ast::Expression>, usize)) -> Box<ast::Expression> {
     __0
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action13<
->(
-    (_, __0, _): (usize, Box<ast::Expression>, usize),
-) -> Box<ast::Expression>
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action13((_, __0, _): (usize, Box<ast::Expression>, usize)) -> Box<ast::Expression> {
     __0
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action14<
->(
-    (_, __0, _): (usize, Box<ast::Expression>, usize),
-) -> Box<ast::Expression>
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action14((_, __0, _): (usize, Box<ast::Expression>, usize)) -> Box<ast::Expression> {
     __0
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action15<
->(
-    (_, __0, _): (usize, ast::Operator, usize),
-) -> ast::Operator
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action15((_, __0, _): (usize, ast::Operator, usize)) -> ast::Operator {
     __0
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action16<
->(
-    (_, __0, _): (usize, Box<ast::Expression>, usize),
-) -> Box<ast::Expression>
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action16((_, __0, _): (usize, Box<ast::Expression>, usize)) -> Box<ast::Expression> {
     __0
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action17<
->(
-    (_, __0, _): (usize, Box<ast::Expression>, usize),
-) -> Box<ast::Expression>
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action17((_, __0, _): (usize, Box<ast::Expression>, usize)) -> Box<ast::Expression> {
     __0
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action18<
->(
-    (_, __0, _): (usize, Box<ast::Expression>, usize),
-) -> Box<ast::Expression>
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action18((_, __0, _): (usize, Box<ast::Expression>, usize)) -> Box<ast::Expression> {
     __0
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action19<
->(
-    (_, __0, _): (usize, Box<ast::Expression>, usize),
-) -> Box<ast::Expression>
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action19((_, __0, _): (usize, Box<ast::Expression>, usize)) -> Box<ast::Expression> {
     __0
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action20<
->(
-    (_, __0, _): (usize, Box<ast::Expression>, usize),
-) -> Box<ast::Expression>
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action20((_, __0, _): (usize, Box<ast::Expression>, usize)) -> Box<ast::Expression> {
     __0
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action21<
->(
-    (_, __0, _): (usize, Vec<Box<ast::Expression>>, usize),
-) -> Vec<Box<ast::Expression>>
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action21((_, __0, _): (usize, Vec<Box<ast::Expression>>, usize)) -> Vec<Box<ast::Expression>> {
     __0
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action22<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action22(
     (_, stmts, _): (usize, alloc::vec::Vec<ast::Statement>, usize),
-) -> Vec<ast::Statement>
-{
+) -> Vec<ast::Statement> {
     stmts
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action23<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action23(
     (_, _, _): (usize, Token, usize),
     (_, name, _): (usize, String, usize),
     (_, _, _): (usize, Token, usize),
     (_, value, _): (usize, Box<ast::Expression>, usize),
     (_, _, _): (usize, Token, usize),
-) -> ast::Statement
-{
-    {
-        ast::Statement::Let { name, value }
-    }
+) -> ast::Statement {
+    { ast::Statement::Let { name, value } }
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action24<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action24(
     (_, _, _): (usize, Token, usize),
     (_, name, _): (usize, String, usize),
     (_, _, _): (usize, Token, usize),
     (_, value, _): (usize, Box<ast::Expression>, usize),
     (_, _, _): (usize, Token, usize),
-) -> ast::Statement
-{
+) -> ast::Statement {
     {
-            ast::Statement::Const {visibility: ast::Visibility::Private, name, value }
+        ast::Statement::Const {
+            visibility: ast::Visibility::Private,
+            name,
+            value,
+        }
     }
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action25<
->(
-    (_, _, _): (usize, Token, usize),
-    (_, _, _): (usize, Token, usize),
-    (_, name, _): (usize, String, usize),
-    (_, _, _): (usize, Token, usize),
-    (_, value, _): (usize, Box<ast::Expression>, usize),
-    (_, _, _): (usize, Token, usize),
-) -> ast::Statement
-{
-    {
-            ast::Statement::Const {visibility: ast::Visibility::Public, name, value }
-    }
-}
-
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action26<
->(
-    (_, _, _): (usize, Token, usize),
-    (_, name, _): (usize, String, usize),
-    (_, _, _): (usize, Token, usize),
-    (_, value, _): (usize, Box<ast::Expression>, usize),
-    (_, _, _): (usize, Token, usize),
-) -> ast::Statement
-{
-    {
-            ast::Statement::Static {visibility: ast::Visibility::Private, name, value }
-    }
-}
-
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action27<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action25(
     (_, _, _): (usize, Token, usize),
     (_, _, _): (usize, Token, usize),
     (_, name, _): (usize, String, usize),
     (_, _, _): (usize, Token, usize),
     (_, value, _): (usize, Box<ast::Expression>, usize),
     (_, _, _): (usize, Token, usize),
-) -> ast::Statement
-{
+) -> ast::Statement {
     {
-            ast::Statement::Static {visibility: ast::Visibility::Public, name, value }
+        ast::Statement::Const {
+            visibility: ast::Visibility::Public,
+            name,
+            value,
+        }
     }
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action28<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action26(
+    (_, _, _): (usize, Token, usize),
+    (_, name, _): (usize, String, usize),
+    (_, _, _): (usize, Token, usize),
+    (_, value, _): (usize, Box<ast::Expression>, usize),
+    (_, _, _): (usize, Token, usize),
+) -> ast::Statement {
+    {
+        ast::Statement::Static {
+            visibility: ast::Visibility::Private,
+            name,
+            value,
+        }
+    }
+}
+
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action27(
+    (_, _, _): (usize, Token, usize),
+    (_, _, _): (usize, Token, usize),
+    (_, name, _): (usize, String, usize),
+    (_, _, _): (usize, Token, usize),
+    (_, value, _): (usize, Box<ast::Expression>, usize),
+    (_, _, _): (usize, Token, usize),
+) -> ast::Statement {
+    {
+        ast::Statement::Static {
+            visibility: ast::Visibility::Public,
+            name,
+            value,
+        }
+    }
+}
+
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action28(
     (_, _, _): (usize, Token, usize),
     (_, name, _): (usize, String, usize),
     (_, _, _): (usize, Token, usize),
@@ -95306,8 +95335,7 @@ fn __action28<
     (_, _, _): (usize, Token, usize),
     (_, ret_type, _): (usize, Option<String>, usize),
     (_, body, _): (usize, ast::Block, usize),
-) -> ast::Statement
-{
+) -> ast::Statement {
     {
         ast::Statement::Function {
             visibility: ast::Visibility::Private,
@@ -95319,9 +95347,12 @@ fn __action28<
     }
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action29<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action29(
     (_, _, _): (usize, Token, usize),
     (_, _, _): (usize, Token, usize),
     (_, name, _): (usize, String, usize),
@@ -95330,8 +95361,7 @@ fn __action29<
     (_, _, _): (usize, Token, usize),
     (_, ret_type, _): (usize, Option<String>, usize),
     (_, body, _): (usize, ast::Block, usize),
-) -> ast::Statement
-{
+) -> ast::Statement {
     {
         ast::Statement::Function {
             visibility: ast::Visibility::Public,
@@ -95343,16 +95373,18 @@ fn __action29<
     }
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action30<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action30(
     (_, _, _): (usize, Token, usize),
     (_, var_name, _): (usize, String, usize),
     (_, _, _): (usize, Token, usize),
     (_, iterable, _): (usize, Box<ast::Expression>, usize),
     (_, body, _): (usize, ast::Block, usize),
-) -> ast::Statement
-{
+) -> ast::Statement {
     {
         ast::Statement::For {
             var_name,
@@ -95362,61 +95394,57 @@ fn __action30<
     }
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action31<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action31(
     (_, _, _): (usize, Token, usize),
     (_, condition, _): (usize, Box<ast::Expression>, usize),
     (_, body, _): (usize, ast::Block, usize),
-) -> ast::Statement
-{
-    {
-        ast::Statement::While {
-            condition,
-            body,
-        }
-    }
+) -> ast::Statement {
+    { ast::Statement::While { condition, body } }
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action32<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action32(
     (_, _, _): (usize, Token, usize),
     (_, expr, _): (usize, Option<Box<ast::Expression>>, usize),
     (_, _, _): (usize, Token, usize),
-) -> ast::Statement
-{
-    {
-        ast::Statement::Return(expr)
-    }
+) -> ast::Statement {
+    { ast::Statement::Return(expr) }
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action33<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action33(
     (_, target, _): (usize, String, usize),
     (_, _, _): (usize, Token, usize),
     (_, value, _): (usize, Box<ast::Expression>, usize),
     (_, _, _): (usize, Token, usize),
-) -> ast::Statement
-{
-    {
-        ast::Statement::Assignment {
-            target,
-            value,
-        }
-    }
+) -> ast::Statement {
+    { ast::Statement::Assignment { target, value } }
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action34<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action34(
     (_, target, _): (usize, String, usize),
     (_, op, _): (usize, ast::AssignOperator, usize),
     (_, value, _): (usize, Box<ast::Expression>, usize),
     (_, _, _): (usize, Token, usize),
-) -> ast::Statement
-{
+) -> ast::Statement {
     {
         ast::Statement::CompoundAssignment {
             target,
@@ -95426,186 +95454,186 @@ fn __action34<
     }
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action35<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action35(
     (_, expr, _): (usize, Box<ast::Expression>, usize),
     (_, _, _): (usize, Token, usize),
-) -> ast::Statement
-{
-    {
-        ast::Statement::Expression(expr)
-    }
+) -> ast::Statement {
+    { ast::Statement::Expression(expr) }
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action36<
->(
-    (_, __0, _): (usize, Token, usize),
-) -> ast::AssignOperator
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action36((_, __0, _): (usize, Token, usize)) -> ast::AssignOperator {
     ast::AssignOperator::Add
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action37<
->(
-    (_, __0, _): (usize, Token, usize),
-) -> ast::AssignOperator
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action37((_, __0, _): (usize, Token, usize)) -> ast::AssignOperator {
     ast::AssignOperator::Sub
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action38<
->(
-    (_, __0, _): (usize, Token, usize),
-) -> ast::AssignOperator
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action38((_, __0, _): (usize, Token, usize)) -> ast::AssignOperator {
     ast::AssignOperator::Mul
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action39<
->(
-    (_, __0, _): (usize, Token, usize),
-) -> ast::AssignOperator
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action39((_, __0, _): (usize, Token, usize)) -> ast::AssignOperator {
     ast::AssignOperator::Div
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action40<
->(
-    (_, __0, _): (usize, Token, usize),
-) -> ast::AssignOperator
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action40((_, __0, _): (usize, Token, usize)) -> ast::AssignOperator {
     ast::AssignOperator::Mod
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action41<
->(
-    (_, __0, _): (usize, Token, usize),
-) -> ast::AssignOperator
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action41((_, __0, _): (usize, Token, usize)) -> ast::AssignOperator {
     ast::AssignOperator::BitAnd
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action42<
->(
-    (_, __0, _): (usize, Token, usize),
-) -> ast::AssignOperator
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action42((_, __0, _): (usize, Token, usize)) -> ast::AssignOperator {
     ast::AssignOperator::BitOr
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action43<
->(
-    (_, __0, _): (usize, Token, usize),
-) -> ast::AssignOperator
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action43((_, __0, _): (usize, Token, usize)) -> ast::AssignOperator {
     ast::AssignOperator::BitXor
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action44<
->(
-    (_, __0, _): (usize, Token, usize),
-) -> ast::AssignOperator
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action44((_, __0, _): (usize, Token, usize)) -> ast::AssignOperator {
     ast::AssignOperator::Shl
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action45<
->(
-    (_, __0, _): (usize, Token, usize),
-) -> ast::AssignOperator
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action45((_, __0, _): (usize, Token, usize)) -> ast::AssignOperator {
     ast::AssignOperator::Shr
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action46<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action46(
     (_, _, _): (usize, Token, usize),
     (_, stmts, _): (usize, alloc::vec::Vec<ast::Statement>, usize),
     (_, _, _): (usize, Token, usize),
-) -> ast::Block
-{
-    {
-        ast::Block { statements: stmts }
-    }
+) -> ast::Block {
+    { ast::Block { statements: stmts } }
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action47<
->(
-    (_, param, _): (usize, ast::Parameter, usize),
-) -> Vec<ast::Parameter>
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action47((_, param, _): (usize, ast::Parameter, usize)) -> Vec<ast::Parameter> {
     vec![param]
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action48<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action48(
     (_, mut params, _): (usize, Vec<ast::Parameter>, usize),
     (_, _, _): (usize, Token, usize),
     (_, param, _): (usize, ast::Parameter, usize),
-) -> Vec<ast::Parameter>
-{
+) -> Vec<ast::Parameter> {
     {
         params.push(param);
         params
     }
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action49<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action49(
     (_, name, _): (usize, String, usize),
     (_, param_type, _): (usize, Option<String>, usize),
-) -> ast::Parameter
-{
-    {
-        ast::Parameter {
-            name,
-            param_type,
-        }
-    }
+) -> ast::Parameter {
+    { ast::Parameter { name, param_type } }
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action50<
->(
-    (_, _, _): (usize, Token, usize),
-    (_, ty, _): (usize, String, usize),
-) -> String
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action50((_, _, _): (usize, Token, usize), (_, ty, _): (usize, String, usize)) -> String {
     ty
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action51<
->(
-    (_, range, _): (usize, Box<ast::Expression>, usize),
-) -> Box<ast::Expression>
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action51((_, range, _): (usize, Box<ast::Expression>, usize)) -> Box<ast::Expression> {
     range
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action52<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action52(
     (_, start, _): (usize, Box<ast::Expression>, usize),
     (_, _, _): (usize, Token, usize),
     (_, end, _): (usize, Box<ast::Expression>, usize),
-) -> Box<ast::Expression>
-{
+) -> Box<ast::Expression> {
     Box::new(ast::Expression::Range {
         start,
         end,
@@ -95613,14 +95641,16 @@ fn __action52<
     })
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action53<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action53(
     (_, start, _): (usize, Box<ast::Expression>, usize),
     (_, _, _): (usize, Token, usize),
     (_, end, _): (usize, Box<ast::Expression>, usize),
-) -> Box<ast::Expression>
-{
+) -> Box<ast::Expression> {
     Box::new(ast::Expression::Range {
         start,
         end,
@@ -95628,23 +95658,25 @@ fn __action53<
     })
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action54<
->(
-    (_, logical_or, _): (usize, Box<ast::Expression>, usize),
-) -> Box<ast::Expression>
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action54((_, logical_or, _): (usize, Box<ast::Expression>, usize)) -> Box<ast::Expression> {
     logical_or
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action55<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action55(
     (_, lhs, _): (usize, Box<ast::Expression>, usize),
     (_, _, _): (usize, Token, usize),
     (_, rhs, _): (usize, Box<ast::Expression>, usize),
-) -> Box<ast::Expression>
-{
+) -> Box<ast::Expression> {
     Box::new(ast::Expression::BinaryOperation {
         lhs,
         operator: ast::Operator::Or,
@@ -95652,23 +95684,25 @@ fn __action55<
     })
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action56<
->(
-    (_, logical_and, _): (usize, Box<ast::Expression>, usize),
-) -> Box<ast::Expression>
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action56((_, logical_and, _): (usize, Box<ast::Expression>, usize)) -> Box<ast::Expression> {
     logical_and
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action57<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action57(
     (_, lhs, _): (usize, Box<ast::Expression>, usize),
     (_, _, _): (usize, Token, usize),
     (_, rhs, _): (usize, Box<ast::Expression>, usize),
-) -> Box<ast::Expression>
-{
+) -> Box<ast::Expression> {
     Box::new(ast::Expression::BinaryOperation {
         lhs,
         operator: ast::Operator::And,
@@ -95676,23 +95710,25 @@ fn __action57<
     })
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action58<
->(
-    (_, bit_or, _): (usize, Box<ast::Expression>, usize),
-) -> Box<ast::Expression>
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action58((_, bit_or, _): (usize, Box<ast::Expression>, usize)) -> Box<ast::Expression> {
     bit_or
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action59<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action59(
     (_, lhs, _): (usize, Box<ast::Expression>, usize),
     (_, _, _): (usize, Token, usize),
     (_, rhs, _): (usize, Box<ast::Expression>, usize),
-) -> Box<ast::Expression>
-{
+) -> Box<ast::Expression> {
     Box::new(ast::Expression::BinaryOperation {
         lhs,
         operator: ast::Operator::BitOr,
@@ -95700,23 +95736,25 @@ fn __action59<
     })
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action60<
->(
-    (_, bit_xor, _): (usize, Box<ast::Expression>, usize),
-) -> Box<ast::Expression>
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action60((_, bit_xor, _): (usize, Box<ast::Expression>, usize)) -> Box<ast::Expression> {
     bit_xor
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action61<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action61(
     (_, lhs, _): (usize, Box<ast::Expression>, usize),
     (_, _, _): (usize, Token, usize),
     (_, rhs, _): (usize, Box<ast::Expression>, usize),
-) -> Box<ast::Expression>
-{
+) -> Box<ast::Expression> {
     Box::new(ast::Expression::BinaryOperation {
         lhs,
         operator: ast::Operator::BitXor,
@@ -95724,23 +95762,25 @@ fn __action61<
     })
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action62<
->(
-    (_, bit_and, _): (usize, Box<ast::Expression>, usize),
-) -> Box<ast::Expression>
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action62((_, bit_and, _): (usize, Box<ast::Expression>, usize)) -> Box<ast::Expression> {
     bit_and
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action63<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action63(
     (_, lhs, _): (usize, Box<ast::Expression>, usize),
     (_, _, _): (usize, Token, usize),
     (_, rhs, _): (usize, Box<ast::Expression>, usize),
-) -> Box<ast::Expression>
-{
+) -> Box<ast::Expression> {
     Box::new(ast::Expression::BinaryOperation {
         lhs,
         operator: ast::Operator::BitAnd,
@@ -95748,23 +95788,25 @@ fn __action63<
     })
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action64<
->(
-    (_, comp, _): (usize, Box<ast::Expression>, usize),
-) -> Box<ast::Expression>
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action64((_, comp, _): (usize, Box<ast::Expression>, usize)) -> Box<ast::Expression> {
     comp
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action65<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action65(
     (_, lhs, _): (usize, Box<ast::Expression>, usize),
     (_, op, _): (usize, ast::Operator, usize),
     (_, rhs, _): (usize, Box<ast::Expression>, usize),
-) -> Box<ast::Expression>
-{
+) -> Box<ast::Expression> {
     Box::new(ast::Expression::BinaryOperation {
         lhs,
         operator: op,
@@ -95772,77 +95814,79 @@ fn __action65<
     })
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action66<
->(
-    (_, bit_shift, _): (usize, Box<ast::Expression>, usize),
-) -> Box<ast::Expression>
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action66((_, bit_shift, _): (usize, Box<ast::Expression>, usize)) -> Box<ast::Expression> {
     bit_shift
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action67<
->(
-    (_, __0, _): (usize, Token, usize),
-) -> ast::Operator
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action67((_, __0, _): (usize, Token, usize)) -> ast::Operator {
     ast::Operator::Eq
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action68<
->(
-    (_, __0, _): (usize, Token, usize),
-) -> ast::Operator
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action68((_, __0, _): (usize, Token, usize)) -> ast::Operator {
     ast::Operator::NotEq
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action69<
->(
-    (_, __0, _): (usize, Token, usize),
-) -> ast::Operator
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action69((_, __0, _): (usize, Token, usize)) -> ast::Operator {
     ast::Operator::Lt
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action70<
->(
-    (_, __0, _): (usize, Token, usize),
-) -> ast::Operator
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action70((_, __0, _): (usize, Token, usize)) -> ast::Operator {
     ast::Operator::LtEq
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action71<
->(
-    (_, __0, _): (usize, Token, usize),
-) -> ast::Operator
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action71((_, __0, _): (usize, Token, usize)) -> ast::Operator {
     ast::Operator::Gt
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action72<
->(
-    (_, __0, _): (usize, Token, usize),
-) -> ast::Operator
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action72((_, __0, _): (usize, Token, usize)) -> ast::Operator {
     ast::Operator::GtEq
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action73<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action73(
     (_, lhs, _): (usize, Box<ast::Expression>, usize),
     (_, _, _): (usize, Token, usize),
     (_, rhs, _): (usize, Box<ast::Expression>, usize),
-) -> Box<ast::Expression>
-{
+) -> Box<ast::Expression> {
     Box::new(ast::Expression::BinaryOperation {
         lhs,
         operator: ast::Operator::Shl,
@@ -95850,14 +95894,16 @@ fn __action73<
     })
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action74<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action74(
     (_, lhs, _): (usize, Box<ast::Expression>, usize),
     (_, _, _): (usize, Token, usize),
     (_, rhs, _): (usize, Box<ast::Expression>, usize),
-) -> Box<ast::Expression>
-{
+) -> Box<ast::Expression> {
     Box::new(ast::Expression::BinaryOperation {
         lhs,
         operator: ast::Operator::Shr,
@@ -95865,23 +95911,25 @@ fn __action74<
     })
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action75<
->(
-    (_, add, _): (usize, Box<ast::Expression>, usize),
-) -> Box<ast::Expression>
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action75((_, add, _): (usize, Box<ast::Expression>, usize)) -> Box<ast::Expression> {
     add
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action76<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action76(
     (_, lhs, _): (usize, Box<ast::Expression>, usize),
     (_, _, _): (usize, Token, usize),
     (_, rhs, _): (usize, Box<ast::Expression>, usize),
-) -> Box<ast::Expression>
-{
+) -> Box<ast::Expression> {
     Box::new(ast::Expression::BinaryOperation {
         lhs,
         operator: ast::Operator::Add,
@@ -95889,14 +95937,16 @@ fn __action76<
     })
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action77<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action77(
     (_, lhs, _): (usize, Box<ast::Expression>, usize),
     (_, _, _): (usize, Token, usize),
     (_, rhs, _): (usize, Box<ast::Expression>, usize),
-) -> Box<ast::Expression>
-{
+) -> Box<ast::Expression> {
     Box::new(ast::Expression::BinaryOperation {
         lhs,
         operator: ast::Operator::Sub,
@@ -95904,23 +95954,25 @@ fn __action77<
     })
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action78<
->(
-    (_, mul, _): (usize, Box<ast::Expression>, usize),
-) -> Box<ast::Expression>
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action78((_, mul, _): (usize, Box<ast::Expression>, usize)) -> Box<ast::Expression> {
     mul
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action79<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action79(
     (_, lhs, _): (usize, Box<ast::Expression>, usize),
     (_, _, _): (usize, Token, usize),
     (_, rhs, _): (usize, Box<ast::Expression>, usize),
-) -> Box<ast::Expression>
-{
+) -> Box<ast::Expression> {
     Box::new(ast::Expression::BinaryOperation {
         lhs,
         operator: ast::Operator::Mul,
@@ -95928,14 +95980,16 @@ fn __action79<
     })
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action80<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action80(
     (_, lhs, _): (usize, Box<ast::Expression>, usize),
     (_, _, _): (usize, Token, usize),
     (_, rhs, _): (usize, Box<ast::Expression>, usize),
-) -> Box<ast::Expression>
-{
+) -> Box<ast::Expression> {
     Box::new(ast::Expression::BinaryOperation {
         lhs,
         operator: ast::Operator::Div,
@@ -95943,127 +95997,125 @@ fn __action80<
     })
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action81<
->(
-    (_, unary, _): (usize, Box<ast::Expression>, usize),
-) -> Box<ast::Expression>
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action81((_, unary, _): (usize, Box<ast::Expression>, usize)) -> Box<ast::Expression> {
     unary
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action82<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action82(
     (_, _, _): (usize, Token, usize),
     (_, expr, _): (usize, Box<ast::Expression>, usize),
-) -> Box<ast::Expression>
-{
+) -> Box<ast::Expression> {
     Box::new(ast::Expression::UnaryOperation {
         operator: ast::UnaryOperator::Neg,
         expr,
     })
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action83<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action83(
     (_, _, _): (usize, Token, usize),
     (_, expr, _): (usize, Box<ast::Expression>, usize),
-) -> Box<ast::Expression>
-{
+) -> Box<ast::Expression> {
     Box::new(ast::Expression::UnaryOperation {
         operator: ast::UnaryOperator::Pos,
         expr,
     })
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action84<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action84(
     (_, _, _): (usize, Token, usize),
     (_, expr, _): (usize, Box<ast::Expression>, usize),
-) -> Box<ast::Expression>
-{
+) -> Box<ast::Expression> {
     Box::new(ast::Expression::UnaryOperation {
         operator: ast::UnaryOperator::Not,
         expr,
     })
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action85<
->(
-    (_, term, _): (usize, Box<ast::Expression>, usize),
-) -> Box<ast::Expression>
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action85((_, term, _): (usize, Box<ast::Expression>, usize)) -> Box<ast::Expression> {
     term
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action86<
->(
-    (_, val, _): (usize, i64, usize),
-) -> Box<ast::Expression>
-{
-    {
-        Box::new(ast::Expression::Integer(val))
-    }
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action86((_, val, _): (usize, i64, usize)) -> Box<ast::Expression> {
+    { Box::new(ast::Expression::Integer(val)) }
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action87<
->(
-    (_, val, _): (usize, f64, usize),
-) -> Box<ast::Expression>
-{
-    {
-        Box::new(ast::Expression::Float(val))
-    }
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action87((_, val, _): (usize, f64, usize)) -> Box<ast::Expression> {
+    { Box::new(ast::Expression::Float(val)) }
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action88<
->(
-    (_, val, _): (usize, String, usize),
-) -> Box<ast::Expression>
-{
-    {
-        Box::new(ast::Expression::String(val))
-    }
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action88((_, val, _): (usize, String, usize)) -> Box<ast::Expression> {
+    { Box::new(ast::Expression::String(val)) }
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action89<
->(
-    (_, __0, _): (usize, Token, usize),
-) -> Box<ast::Expression>
-{
-    {
-        Box::new(ast::Expression::Boolean(true))
-    }
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action89((_, __0, _): (usize, Token, usize)) -> Box<ast::Expression> {
+    { Box::new(ast::Expression::Boolean(true)) }
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action90<
->(
-    (_, __0, _): (usize, Token, usize),
-) -> Box<ast::Expression>
-{
-    {
-        Box::new(ast::Expression::Boolean(false))
-    }
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action90((_, __0, _): (usize, Token, usize)) -> Box<ast::Expression> {
+    { Box::new(ast::Expression::Boolean(false)) }
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action91<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action91(
     (_, name, _): (usize, String, usize),
     (_, _, _): (usize, Token, usize),
     (_, args, _): (usize, Option<Vec<Box<ast::Expression>>>, usize),
     (_, _, _): (usize, Token, usize),
-) -> Box<ast::Expression>
-{
+) -> Box<ast::Expression> {
     {
         Box::new(ast::Expression::FunctionCall {
             name,
@@ -96072,363 +96124,322 @@ fn __action91<
     }
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action92<
->(
-    (_, name, _): (usize, String, usize),
-) -> Box<ast::Expression>
-{
-    {
-        Box::new(ast::Expression::Variable(name))
-    }
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action92((_, name, _): (usize, String, usize)) -> Box<ast::Expression> {
+    { Box::new(ast::Expression::Variable(name)) }
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action93<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action93(
     (_, _, _): (usize, Token, usize),
     (_, __0, _): (usize, Box<ast::Expression>, usize),
     (_, _, _): (usize, Token, usize),
-) -> Box<ast::Expression>
-{
+) -> Box<ast::Expression> {
     __0
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action94<
->(
-    (_, block, _): (usize, ast::Block, usize),
-) -> Box<ast::Expression>
-{
-    {
-        Box::new(ast::Expression::Block(block))
-    }
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action94((_, block, _): (usize, ast::Block, usize)) -> Box<ast::Expression> {
+    { Box::new(ast::Expression::Block(block)) }
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action95<
->(
-    (_, expr, _): (usize, Box<ast::Expression>, usize),
-) -> Vec<Box<ast::Expression>>
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action95((_, expr, _): (usize, Box<ast::Expression>, usize)) -> Vec<Box<ast::Expression>> {
     vec![expr]
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action96<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action96(
     (_, mut args, _): (usize, Vec<Box<ast::Expression>>, usize),
     (_, _, _): (usize, Token, usize),
     (_, expr, _): (usize, Box<ast::Expression>, usize),
-) -> Vec<Box<ast::Expression>>
-{
+) -> Vec<Box<ast::Expression>> {
     {
         args.push(expr);
         args
     }
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action97<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action97(
     (_, __0, _): (usize, Vec<Box<ast::Expression>>, usize),
-) -> Option<Vec<Box<ast::Expression>>>
-{
+) -> Option<Vec<Box<ast::Expression>>> {
     Some(__0)
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action98<
->(
-    __lookbehind: &usize,
-    __lookahead: &usize,
-) -> Option<Vec<Box<ast::Expression>>>
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action98(__lookbehind: &usize, __lookahead: &usize) -> Option<Vec<Box<ast::Expression>>> {
     None
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action99<
->(
-    (_, __0, _): (usize, String, usize),
-) -> Option<String>
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action99((_, __0, _): (usize, String, usize)) -> Option<String> {
     Some(__0)
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action100<
->(
-    __lookbehind: &usize,
-    __lookahead: &usize,
-) -> Option<String>
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action100(__lookbehind: &usize, __lookahead: &usize) -> Option<String> {
     None
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action101<
->(
-    (_, _, _): (usize, Token, usize),
-    (_, __0, _): (usize, String, usize),
-) -> String
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action101((_, _, _): (usize, Token, usize), (_, __0, _): (usize, String, usize)) -> String {
     __0
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action102<
->(
-    (_, __0, _): (usize, Box<ast::Expression>, usize),
-) -> Option<Box<ast::Expression>>
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action102((_, __0, _): (usize, Box<ast::Expression>, usize)) -> Option<Box<ast::Expression>> {
     Some(__0)
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action103<
->(
-    __lookbehind: &usize,
-    __lookahead: &usize,
-) -> Option<Box<ast::Expression>>
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action103(__lookbehind: &usize, __lookahead: &usize) -> Option<Box<ast::Expression>> {
     None
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action104<
->(
-    (_, __0, _): (usize, String, usize),
-) -> Option<String>
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action104((_, __0, _): (usize, String, usize)) -> Option<String> {
     Some(__0)
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action105<
->(
-    __lookbehind: &usize,
-    __lookahead: &usize,
-) -> Option<String>
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action105(__lookbehind: &usize, __lookahead: &usize) -> Option<String> {
     None
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action106<
->(
-    (_, __0, _): (usize, Vec<ast::Parameter>, usize),
-) -> Option<Vec<ast::Parameter>>
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action106((_, __0, _): (usize, Vec<ast::Parameter>, usize)) -> Option<Vec<ast::Parameter>> {
     Some(__0)
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action107<
->(
-    __lookbehind: &usize,
-    __lookahead: &usize,
-) -> Option<Vec<ast::Parameter>>
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action107(__lookbehind: &usize, __lookahead: &usize) -> Option<Vec<ast::Parameter>> {
     None
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action108<
->(
-    __lookbehind: &usize,
-    __lookahead: &usize,
-) -> alloc::vec::Vec<ast::Statement>
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action108(__lookbehind: &usize, __lookahead: &usize) -> alloc::vec::Vec<ast::Statement> {
     alloc::vec![]
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action109<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action109(
     (_, v, _): (usize, alloc::vec::Vec<ast::Statement>, usize),
-) -> alloc::vec::Vec<ast::Statement>
-{
+) -> alloc::vec::Vec<ast::Statement> {
     v
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action110<
->(
-    (_, __0, _): (usize, ast::Statement, usize),
-) -> alloc::vec::Vec<ast::Statement>
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action110((_, __0, _): (usize, ast::Statement, usize)) -> alloc::vec::Vec<ast::Statement> {
     alloc::vec![__0]
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn __action111<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action111(
     (_, v, _): (usize, alloc::vec::Vec<ast::Statement>, usize),
     (_, e, _): (usize, ast::Statement, usize),
-) -> alloc::vec::Vec<ast::Statement>
-{
-    { let mut v = v; v.push(e); v }
+) -> alloc::vec::Vec<ast::Statement> {
+    {
+        let mut v = v;
+        v.push(e);
+        v
+    }
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn __action112<
->(
-    __0: (usize, Token, usize),
-    __1: (usize, String, usize),
-) -> Option<String>
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action112(__0: (usize, Token, usize), __1: (usize, String, usize)) -> Option<String> {
     let __start0 = __0.0;
     let __end0 = __1.2;
-    let __temp0 = __action101(
-        __0,
-        __1,
-    );
+    let __temp0 = __action101(__0, __1);
     let __temp0 = (__start0, __temp0, __end0);
-    __action99(
-        __temp0,
-    )
+    __action99(__temp0)
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn __action113<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action113(
     __0: (usize, String, usize),
     __1: (usize, Token, usize),
     __2: (usize, String, usize),
-) -> ast::Parameter
-{
+) -> ast::Parameter {
     let __start0 = __1.0;
     let __end0 = __2.2;
-    let __temp0 = __action112(
-        __1,
-        __2,
-    );
+    let __temp0 = __action112(__1, __2);
     let __temp0 = (__start0, __temp0, __end0);
-    __action49(
-        __0,
-        __temp0,
-    )
+    __action49(__0, __temp0)
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn __action114<
->(
-    __0: (usize, String, usize),
-) -> ast::Parameter
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action114(__0: (usize, String, usize)) -> ast::Parameter {
     let __start0 = __0.2;
     let __end0 = __0.2;
-    let __temp0 = __action100(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action100(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action49(
-        __0,
-        __temp0,
-    )
+    __action49(__0, __temp0)
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn __action115<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action115(
     __0: (usize, String, usize),
     __1: (usize, Token, usize),
     __2: (usize, Vec<Box<ast::Expression>>, usize),
     __3: (usize, Token, usize),
-) -> Box<ast::Expression>
-{
+) -> Box<ast::Expression> {
     let __start0 = __2.0;
     let __end0 = __2.2;
-    let __temp0 = __action97(
-        __2,
-    );
+    let __temp0 = __action97(__2);
     let __temp0 = (__start0, __temp0, __end0);
-    __action91(
-        __0,
-        __1,
-        __temp0,
-        __3,
-    )
+    __action91(__0, __1, __temp0, __3)
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn __action116<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action116(
     __0: (usize, String, usize),
     __1: (usize, Token, usize),
     __2: (usize, Token, usize),
-) -> Box<ast::Expression>
-{
+) -> Box<ast::Expression> {
     let __start0 = __1.2;
     let __end0 = __2.0;
-    let __temp0 = __action98(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action98(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action91(
-        __0,
-        __1,
-        __temp0,
-        __2,
-    )
+    __action91(__0, __1, __temp0, __2)
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn __action117<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action117(
     __0: (usize, Token, usize),
     __1: (usize, Box<ast::Expression>, usize),
     __2: (usize, Token, usize),
-) -> ast::Statement
-{
+) -> ast::Statement {
     let __start0 = __1.0;
     let __end0 = __1.2;
-    let __temp0 = __action102(
-        __1,
-    );
+    let __temp0 = __action102(__1);
     let __temp0 = (__start0, __temp0, __end0);
-    __action32(
-        __0,
-        __temp0,
-        __2,
-    )
+    __action32(__0, __temp0, __2)
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn __action118<
->(
-    __0: (usize, Token, usize),
-    __1: (usize, Token, usize),
-) -> ast::Statement
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action118(__0: (usize, Token, usize), __1: (usize, Token, usize)) -> ast::Statement {
     let __start0 = __0.2;
     let __end0 = __1.0;
-    let __temp0 = __action103(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action103(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action32(
-        __0,
-        __temp0,
-        __1,
-    )
+    __action32(__0, __temp0, __1)
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn __action119<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action119(
     __0: (usize, Token, usize),
     __1: (usize, String, usize),
     __2: (usize, Token, usize),
@@ -96436,59 +96447,40 @@ fn __action119<
     __4: (usize, Token, usize),
     __5: (usize, Option<String>, usize),
     __6: (usize, ast::Block, usize),
-) -> ast::Statement
-{
+) -> ast::Statement {
     let __start0 = __3.0;
     let __end0 = __3.2;
-    let __temp0 = __action106(
-        __3,
-    );
+    let __temp0 = __action106(__3);
     let __temp0 = (__start0, __temp0, __end0);
-    __action28(
-        __0,
-        __1,
-        __2,
-        __temp0,
-        __4,
-        __5,
-        __6,
-    )
+    __action28(__0, __1, __2, __temp0, __4, __5, __6)
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn __action120<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action120(
     __0: (usize, Token, usize),
     __1: (usize, String, usize),
     __2: (usize, Token, usize),
     __3: (usize, Token, usize),
     __4: (usize, Option<String>, usize),
     __5: (usize, ast::Block, usize),
-) -> ast::Statement
-{
+) -> ast::Statement {
     let __start0 = __2.2;
     let __end0 = __3.0;
-    let __temp0 = __action107(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action107(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action28(
-        __0,
-        __1,
-        __2,
-        __temp0,
-        __3,
-        __4,
-        __5,
-    )
+    __action28(__0, __1, __2, __temp0, __3, __4, __5)
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn __action121<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action121(
     __0: (usize, Token, usize),
     __1: (usize, Token, usize),
     __2: (usize, String, usize),
@@ -96497,30 +96489,20 @@ fn __action121<
     __5: (usize, Token, usize),
     __6: (usize, Option<String>, usize),
     __7: (usize, ast::Block, usize),
-) -> ast::Statement
-{
+) -> ast::Statement {
     let __start0 = __4.0;
     let __end0 = __4.2;
-    let __temp0 = __action106(
-        __4,
-    );
+    let __temp0 = __action106(__4);
     let __temp0 = (__start0, __temp0, __end0);
-    __action29(
-        __0,
-        __1,
-        __2,
-        __3,
-        __temp0,
-        __5,
-        __6,
-        __7,
-    )
+    __action29(__0, __1, __2, __3, __temp0, __5, __6, __7)
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn __action122<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action122(
     __0: (usize, Token, usize),
     __1: (usize, Token, usize),
     __2: (usize, String, usize),
@@ -96528,31 +96510,20 @@ fn __action122<
     __4: (usize, Token, usize),
     __5: (usize, Option<String>, usize),
     __6: (usize, ast::Block, usize),
-) -> ast::Statement
-{
+) -> ast::Statement {
     let __start0 = __3.2;
     let __end0 = __4.0;
-    let __temp0 = __action107(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action107(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action29(
-        __0,
-        __1,
-        __2,
-        __3,
-        __temp0,
-        __4,
-        __5,
-        __6,
-    )
+    __action29(__0, __1, __2, __3, __temp0, __4, __5, __6)
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn __action123<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action123(
     __0: (usize, Token, usize),
     __1: (usize, String, usize),
     __2: (usize, Token, usize),
@@ -96560,115 +96531,79 @@ fn __action123<
     __4: (usize, Token, usize),
     __5: (usize, String, usize),
     __6: (usize, ast::Block, usize),
-) -> ast::Statement
-{
+) -> ast::Statement {
     let __start0 = __5.0;
     let __end0 = __5.2;
-    let __temp0 = __action104(
-        __5,
-    );
+    let __temp0 = __action104(__5);
     let __temp0 = (__start0, __temp0, __end0);
-    __action119(
-        __0,
-        __1,
-        __2,
-        __3,
-        __4,
-        __temp0,
-        __6,
-    )
+    __action119(__0, __1, __2, __3, __4, __temp0, __6)
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn __action124<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action124(
     __0: (usize, Token, usize),
     __1: (usize, String, usize),
     __2: (usize, Token, usize),
     __3: (usize, Vec<ast::Parameter>, usize),
     __4: (usize, Token, usize),
     __5: (usize, ast::Block, usize),
-) -> ast::Statement
-{
+) -> ast::Statement {
     let __start0 = __4.2;
     let __end0 = __5.0;
-    let __temp0 = __action105(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action105(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action119(
-        __0,
-        __1,
-        __2,
-        __3,
-        __4,
-        __temp0,
-        __5,
-    )
+    __action119(__0, __1, __2, __3, __4, __temp0, __5)
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn __action125<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action125(
     __0: (usize, Token, usize),
     __1: (usize, String, usize),
     __2: (usize, Token, usize),
     __3: (usize, Token, usize),
     __4: (usize, String, usize),
     __5: (usize, ast::Block, usize),
-) -> ast::Statement
-{
+) -> ast::Statement {
     let __start0 = __4.0;
     let __end0 = __4.2;
-    let __temp0 = __action104(
-        __4,
-    );
+    let __temp0 = __action104(__4);
     let __temp0 = (__start0, __temp0, __end0);
-    __action120(
-        __0,
-        __1,
-        __2,
-        __3,
-        __temp0,
-        __5,
-    )
+    __action120(__0, __1, __2, __3, __temp0, __5)
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn __action126<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action126(
     __0: (usize, Token, usize),
     __1: (usize, String, usize),
     __2: (usize, Token, usize),
     __3: (usize, Token, usize),
     __4: (usize, ast::Block, usize),
-) -> ast::Statement
-{
+) -> ast::Statement {
     let __start0 = __3.2;
     let __end0 = __4.0;
-    let __temp0 = __action105(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action105(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action120(
-        __0,
-        __1,
-        __2,
-        __3,
-        __temp0,
-        __4,
-    )
+    __action120(__0, __1, __2, __3, __temp0, __4)
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn __action127<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action127(
     __0: (usize, Token, usize),
     __1: (usize, Token, usize),
     __2: (usize, String, usize),
@@ -96677,30 +96612,20 @@ fn __action127<
     __5: (usize, Token, usize),
     __6: (usize, String, usize),
     __7: (usize, ast::Block, usize),
-) -> ast::Statement
-{
+) -> ast::Statement {
     let __start0 = __6.0;
     let __end0 = __6.2;
-    let __temp0 = __action104(
-        __6,
-    );
+    let __temp0 = __action104(__6);
     let __temp0 = (__start0, __temp0, __end0);
-    __action121(
-        __0,
-        __1,
-        __2,
-        __3,
-        __4,
-        __5,
-        __temp0,
-        __7,
-    )
+    __action121(__0, __1, __2, __3, __4, __5, __temp0, __7)
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn __action128<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action128(
     __0: (usize, Token, usize),
     __1: (usize, Token, usize),
     __2: (usize, String, usize),
@@ -96708,31 +96633,20 @@ fn __action128<
     __4: (usize, Vec<ast::Parameter>, usize),
     __5: (usize, Token, usize),
     __6: (usize, ast::Block, usize),
-) -> ast::Statement
-{
+) -> ast::Statement {
     let __start0 = __5.2;
     let __end0 = __6.0;
-    let __temp0 = __action105(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action105(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action121(
-        __0,
-        __1,
-        __2,
-        __3,
-        __4,
-        __5,
-        __temp0,
-        __6,
-    )
+    __action121(__0, __1, __2, __3, __4, __5, __temp0, __6)
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn __action129<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action129(
     __0: (usize, Token, usize),
     __1: (usize, Token, usize),
     __2: (usize, String, usize),
@@ -96740,152 +96654,108 @@ fn __action129<
     __4: (usize, Token, usize),
     __5: (usize, String, usize),
     __6: (usize, ast::Block, usize),
-) -> ast::Statement
-{
+) -> ast::Statement {
     let __start0 = __5.0;
     let __end0 = __5.2;
-    let __temp0 = __action104(
-        __5,
-    );
+    let __temp0 = __action104(__5);
     let __temp0 = (__start0, __temp0, __end0);
-    __action122(
-        __0,
-        __1,
-        __2,
-        __3,
-        __4,
-        __temp0,
-        __6,
-    )
+    __action122(__0, __1, __2, __3, __4, __temp0, __6)
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn __action130<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action130(
     __0: (usize, Token, usize),
     __1: (usize, Token, usize),
     __2: (usize, String, usize),
     __3: (usize, Token, usize),
     __4: (usize, Token, usize),
     __5: (usize, ast::Block, usize),
-) -> ast::Statement
-{
+) -> ast::Statement {
     let __start0 = __4.2;
     let __end0 = __5.0;
-    let __temp0 = __action105(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action105(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action122(
-        __0,
-        __1,
-        __2,
-        __3,
-        __4,
-        __temp0,
-        __5,
-    )
+    __action122(__0, __1, __2, __3, __4, __temp0, __5)
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn __action131<
->(
-    __0: (usize, Token, usize),
-    __1: (usize, Token, usize),
-) -> ast::Block
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action131(__0: (usize, Token, usize), __1: (usize, Token, usize)) -> ast::Block {
     let __start0 = __0.2;
     let __end0 = __1.0;
-    let __temp0 = __action108(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action108(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action46(
-        __0,
-        __temp0,
-        __1,
-    )
+    __action46(__0, __temp0, __1)
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn __action132<
->(
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action132(
     __0: (usize, Token, usize),
     __1: (usize, alloc::vec::Vec<ast::Statement>, usize),
     __2: (usize, Token, usize),
-) -> ast::Block
-{
+) -> ast::Block {
     let __start0 = __1.0;
     let __end0 = __1.2;
-    let __temp0 = __action109(
-        __1,
-    );
+    let __temp0 = __action109(__1);
     let __temp0 = (__start0, __temp0, __end0);
-    __action46(
-        __0,
-        __temp0,
-        __2,
-    )
+    __action46(__0, __temp0, __2)
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn __action133<
->(
-    __lookbehind: &usize,
-    __lookahead: &usize,
-) -> Vec<ast::Statement>
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action133(__lookbehind: &usize, __lookahead: &usize) -> Vec<ast::Statement> {
     let __start0 = *__lookbehind;
     let __end0 = *__lookahead;
-    let __temp0 = __action108(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action108(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action22(
-        __temp0,
-    )
+    __action22(__temp0)
 }
 
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn __action134<
->(
-    __0: (usize, alloc::vec::Vec<ast::Statement>, usize),
-) -> Vec<ast::Statement>
-{
+#[allow(
+    clippy::too_many_arguments,
+    clippy::needless_lifetimes,
+    clippy::just_underscores_and_digits
+)]
+fn __action134(__0: (usize, alloc::vec::Vec<ast::Statement>, usize)) -> Vec<ast::Statement> {
     let __start0 = __0.0;
     let __end0 = __0.2;
-    let __temp0 = __action109(
-        __0,
-    );
+    let __temp0 = __action109(__0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action22(
-        __temp0,
-    )
+    __action22(__temp0)
 }
 
 #[allow(clippy::type_complexity, dead_code)]
-pub trait __ToTriple<>
-{
-    fn to_triple(self) -> Result<(usize,Token,usize), __lalrpop_util::ParseError<usize, Token, LexicalError>>;
+pub trait __ToTriple {
+    fn to_triple(
+        self,
+    ) -> Result<(usize, Token, usize), __lalrpop_util::ParseError<usize, Token, LexicalError>>;
 }
 
-impl<> __ToTriple<> for (usize, Token, usize)
-{
-    fn to_triple(self) -> Result<(usize,Token,usize), __lalrpop_util::ParseError<usize, Token, LexicalError>> {
+impl __ToTriple for (usize, Token, usize) {
+    fn to_triple(
+        self,
+    ) -> Result<(usize, Token, usize), __lalrpop_util::ParseError<usize, Token, LexicalError>> {
         Ok(self)
     }
 }
-impl<> __ToTriple<> for Result<(usize, Token, usize), LexicalError>
-{
-    fn to_triple(self) -> Result<(usize,Token,usize), __lalrpop_util::ParseError<usize, Token, LexicalError>> {
+impl __ToTriple for Result<(usize, Token, usize), LexicalError> {
+    fn to_triple(
+        self,
+    ) -> Result<(usize, Token, usize), __lalrpop_util::ParseError<usize, Token, LexicalError>> {
         self.map_err(|error| __lalrpop_util::ParseError::User { error })
     }
 }
