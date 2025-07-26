@@ -7,6 +7,12 @@ pub enum Statement {
         value: Box<Expression>,
     },
     Const {
+        visibility: Visibility,
+        name: String,
+        value: Box<Expression>,
+    },
+    Static {
+        visibility: Visibility,
         name: String,
         value: Box<Expression>,
     },
@@ -89,7 +95,7 @@ pub enum Operator {
     Eq,
     NotEq,
     Lt,
-    Le,
+    LtEq,
     Gt,
-    Ge,
+    GtEq,
 }

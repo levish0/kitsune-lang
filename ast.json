@@ -3,16 +3,19 @@
     "Expression": {
       "BinaryOperation": {
         "lhs": {
-          "Integer": 3
-        },
-        "operator": "Add",
-        "rhs": {
-          "UnaryOperation": {
-            "operator": "Plus",
-            "expr": {
-              "Integer": 4
+          "BinaryOperation": {
+            "lhs": {
+              "Variable": "x"
+            },
+            "operator": "Lt",
+            "rhs": {
+              "Variable": "y"
             }
           }
+        },
+        "operator": "LtEq",
+        "rhs": {
+          "Integer": 4
         }
       }
     }

@@ -26,9 +26,17 @@ extern {
         "-" => Token::Minus,
         ":" => Token::Colon,
         "->" => Token::Arrow,
+        // 비교연산자
+        "==" => Token::EqEq,
+        "!=" => Token::NotEq,
+        "<" => Token::Lt,
+        "<=" => Token::LtEq,
+        ">" => Token::Gt,
+        ">=" => Token::GtEq,
         // 키워드
         "let" => Token::Let,
         "const" => Token::Const,
+        "static" => Token::Static,
         "fn" => Token::Fn,
         "if" => Token::If,
         "else" => Token::Else,
@@ -59,8 +67,18 @@ pub Statement: ast::Statement = {
         ast::Statement::Let { name, value }
     },
     "const" <name:"identifier"> "=" <value:Expression> ";" => {
-            ast::Statement::Const { name, value }
+            ast::Statement::Const {visibility: ast::Visibility::Private, name, value }
     },
+    "pub" "const" <name:"identifier"> "=" <value:Expression> ";" => {
+            ast::Statement::Const {visibility: ast::Visibility::Public, name, value }
+    },
+    "static" <name:"identifier"> "=" <value:Expression> ";" => {
+            ast::Statement::Static {visibility: ast::Visibility::Private, name, value }
+    },
+    "pub" "static" <name:"identifier"> "=" <value:Expression> ";" => {
+            ast::Statement::Static {visibility: ast::Visibility::Public, name, value }
+    },
+
     // private (기본) 함수 선언
     "fn" <name:"identifier"> "(" <params:ParamList?> ")" <ret_type:ReturnType?> <body:Block> => {
         ast::Statement::Function {
@@ -148,9 +166,43 @@ pub RangeExpr: Box<ast::Expression> = {
         end,
         inclusive: false,
     }),
-    <add:AdditiveExpr> => add,
+    <comp:ComparisonExpr> => comp,
 };
 // 그 다음 우선순위 (1)
+pub ComparisonExpr: Box<ast::Expression> = {
+    <lhs:ComparisonExpr> "==" <rhs:AdditiveExpr> => Box::new(ast::Expression::BinaryOperation {
+        lhs,
+        operator: ast::Operator::Eq,
+        rhs,
+    }),
+    <lhs:ComparisonExpr> "!=" <rhs:AdditiveExpr> => Box::new(ast::Expression::BinaryOperation {
+        lhs,
+        operator: ast::Operator::NotEq,
+        rhs,
+    }),
+    <lhs:ComparisonExpr> "<" <rhs:AdditiveExpr> => Box::new(ast::Expression::BinaryOperation {
+        lhs,
+        operator: ast::Operator::Lt,
+        rhs,
+    }),
+    <lhs:ComparisonExpr> "<=" <rhs:AdditiveExpr> => Box::new(ast::Expression::BinaryOperation {
+        lhs,
+        operator: ast::Operator::LtEq,
+        rhs,
+    }),
+    <lhs:ComparisonExpr> ">" <rhs:AdditiveExpr> => Box::new(ast::Expression::BinaryOperation {
+        lhs,
+        operator: ast::Operator::Gt,
+        rhs,
+    }),
+    <lhs:ComparisonExpr> ">=" <rhs:AdditiveExpr> => Box::new(ast::Expression::BinaryOperation {
+        lhs,
+        operator: ast::Operator::GtEq,
+        rhs,
+    }),
+    <add:AdditiveExpr> => add,
+};
+// 그 다음 우선순위 (2)
 pub AdditiveExpr: Box<ast::Expression> = {
     <lhs:AdditiveExpr> "+" <rhs:MultiplicativeExpr> => Box::new(ast::Expression::BinaryOperation {
         lhs,

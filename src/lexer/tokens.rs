@@ -39,11 +39,11 @@ pub enum Token {
     #[token("<")]
     Lt,
     #[token("<=")]
-    Le,
+    LtEq,
     #[token(">")]
     Gt,
     #[token(">=")]
-    Ge,
+    GtEq,
     #[token("->")]
     Arrow,
     #[token(":")]
@@ -58,6 +58,8 @@ pub enum Token {
     Let,
     #[token("const")]
     Const,
+    #[token("static")]
+    Static,
     #[token("fn")]
     Fn,
     #[token("if")]
