@@ -102,7 +102,7 @@ pub enum Operator {
     Sub, // -
     Mul, // *
     Div, // /
-    Mod, // % (새로 추가)
+    Mod, // %
 
     // 비교 연산자
     Eq,    // ==
@@ -112,11 +112,11 @@ pub enum Operator {
     Gt,    // >
     GtEq,  // >=
 
-    // 논리 연산자 (새로 추가)
+    // 논리 연산자
     And, // &&
     Or,  // ||
 
-    // 비트와이즈 연산자 (새로 추가)
+    // 비트와이즈 연산자
     BitAnd, // &
     BitOr,  // |
     BitXor, // ^
