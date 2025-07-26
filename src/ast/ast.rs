@@ -4,16 +4,19 @@ use serde::Serialize;
 pub enum Statement {
     Let {
         name: String,
+        type_annotation: Option<Type>,
         value: Box<Expression>,
     },
     Const {
         visibility: Visibility,
         name: String,
+        type_annotation: Option<Type>,
         value: Box<Expression>,
     },
     Static {
         visibility: Visibility,
         name: String,
+        type_annotation: Option<Type>,
         value: Box<Expression>,
     },
     Assignment {
@@ -54,12 +57,20 @@ pub enum Visibility {
 #[derive(Debug, Clone, PartialEq, Serialize)]
 pub struct Parameter {
     pub name: String,
-    pub param_type: Option<String>,
+    pub param_type: Option<Type>,
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize)]
 pub struct Block {
     pub statements: Vec<Statement>,
+}
+#[derive(Clone, Debug, PartialEq, Serialize)]
+pub enum Type {
+    Simple(String),
+    Generic {
+        name: String,
+        params: Vec<Type>,
+    },
 }
 #[derive(Clone, Debug, PartialEq, Serialize)]
 pub enum Expression {
@@ -68,6 +79,7 @@ pub enum Expression {
     String(String),
     Boolean(bool),
     Variable(String),
+    Array(Vec<Box<Expression>>),
     UnaryOperation {
         operator: UnaryOperator,
         expr: Box<Expression>,

@@ -14,6 +14,8 @@ extern {
         "}" => Token::RBrace,
         "(" => Token::LParen,
         ")" => Token::RParen,
+        "[" => Token::LBracket,
+        "]" => Token::RBracket,
         "," => Token::Comma,
         "..=" => Token::RangeInclusive,
         ".." => Token::Range,
@@ -49,10 +51,10 @@ extern {
         // 비교연산자
         "==" => Token::EqEq,
         "!=" => Token::NotEq,
-        "<" => Token::Lt,
         "<=" => Token::LtEq,
-        ">" => Token::Gt,
         ">=" => Token::GtEq,
+        "<" => Token::Lt,
+        ">" => Token::Gt,
         // 키워드
         "let" => Token::Let,
         "const" => Token::Const,
@@ -83,20 +85,44 @@ pub KitsuneScript: Vec<ast::Statement> = {
 
 pub Statement: ast::Statement = {
     // 변수 선언
-    "let" <name:"identifier"> "=" <value:Expression> ";" => {
-        ast::Statement::Let { name, value }
+    "let" <name:"identifier"> <type_ann:TypeAnnotation?> "=" <value:Expression> ";" => {
+        ast::Statement::Let {
+            name,
+            type_annotation: type_ann,
+            value
+        }
     },
-    "const" <name:"identifier"> "=" <value:Expression> ";" => {
-            ast::Statement::Const {visibility: ast::Visibility::Private, name, value }
+    "const" <name:"identifier"> <type_ann:TypeAnnotation?> "=" <value:Expression> ";" => {
+        ast::Statement::Const {
+            visibility: ast::Visibility::Private,
+            type_annotation: type_ann,
+            name,
+            value
+        }
     },
-    "pub" "const" <name:"identifier"> "=" <value:Expression> ";" => {
-            ast::Statement::Const {visibility: ast::Visibility::Public, name, value }
+    "pub" "const" <name:"identifier"> <type_ann:TypeAnnotation?> "=" <value:Expression> ";" => {
+        ast::Statement::Const {
+            visibility: ast::Visibility::Public,
+            type_annotation: type_ann,
+            name,
+            value
+        }
     },
-    "static" <name:"identifier"> "=" <value:Expression> ";" => {
-            ast::Statement::Static {visibility: ast::Visibility::Private, name, value }
+    "static" <name:"identifier"> <type_ann:TypeAnnotation?> "=" <value:Expression> ";" => {
+        ast::Statement::Static {
+            visibility: ast::Visibility::Private,
+            type_annotation: type_ann,
+            name,
+            value
+        }
     },
-    "pub" "static" <name:"identifier"> "=" <value:Expression> ";" => {
-            ast::Statement::Static {visibility: ast::Visibility::Public, name, value }
+    "pub" "static" <name:"identifier"> <type_ann:TypeAnnotation?> "=" <value:Expression> ";" => {
+        ast::Statement::Static {
+            visibility: ast::Visibility::Public,
+            type_annotation: type_ann,
+            name,
+            value
+        }
     },
 
     // private (기본) 함수 선언
@@ -184,8 +210,25 @@ pub ParamList: Vec<ast::Parameter> = {
     },
 }
 
+TypeAnnotation: ast::Type = {
+    ":" <ty:TypeExpr> => ty
+};
+
+TypeExpr: ast::Type = {
+    <name:"identifier"> "<" <params:TypeExprArray> ">" => ast::Type::Generic { name, params },
+    <name:"identifier"> => ast::Type::Simple(name),
+};
+
+TypeExprArray: Vec<ast::Type> = {
+    <ty:TypeExpr> => vec![ty],
+    <mut types:TypeExprArray> "," <ty:TypeExpr> => {
+        types.push(ty);
+        types
+    },
+};
+
 pub Parameter: ast::Parameter = {
-    <name:"identifier"> <param_type:(":" <"identifier">)?> => {
+    <name:"identifier"> <param_type:(":" <TypeExpr>)?> => {
         ast::Parameter {
             name,
             param_type,
@@ -365,6 +408,9 @@ pub Term: Box<ast::Expression> = {
     },
     "false" => {
         Box::new(ast::Expression::Boolean(false))
+    },
+    "[" <elements:ArgList?> "]" => {
+            Box::new(ast::Expression::Array(elements.unwrap_or_default()))
     },
     // 함수 호출
     <name:"identifier"> "(" <args:ArgList?> ")" => {

@@ -1,26 +1,120 @@
 [
   {
-    "CompoundAssignment": {
-      "target": "x",
-      "operator": "Add",
-      "value": {
-        "BinaryOperation": {
-          "lhs": {
-            "Integer": 3
-          },
-          "operator": "BitXor",
-          "rhs": {
-            "BinaryOperation": {
-              "lhs": {
-                "Integer": 4
+    "Function": {
+      "visibility": "Private",
+      "name": "main",
+      "params": [],
+      "return_type": null,
+      "body": {
+        "statements": [
+          {
+            "Let": {
+              "name": "x",
+              "type_annotation": {
+                "Simple": "i32"
               },
-              "operator": "Shl",
-              "rhs": {
-                "Integer": 4
+              "value": {
+                "Integer": 54
+              }
+            }
+          },
+          {
+            "Let": {
+              "name": "y",
+              "type_annotation": {
+                "Simple": "i32"
+              },
+              "value": {
+                "Integer": 7
+              }
+            }
+          },
+          {
+            "Let": {
+              "name": "k",
+              "type_annotation": {
+                "Generic": {
+                  "name": "Vec",
+                  "params": [
+                    {
+                      "Simple": "i32"
+                    }
+                  ]
+                }
+              },
+              "value": {
+                "Array": [
+                  {
+                    "Integer": 3
+                  },
+                  {
+                    "Integer": 4
+                  },
+                  {
+                    "Integer": 5
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "Let": {
+              "name": "z",
+              "type_annotation": null,
+              "value": {
+                "FunctionCall": {
+                  "name": "sum",
+                  "args": [
+                    {
+                      "Variable": "x"
+                    },
+                    {
+                      "Variable": "y"
+                    }
+                  ]
+                }
               }
             }
           }
+        ]
+      }
+    }
+  },
+  {
+    "Function": {
+      "visibility": "Private",
+      "name": "sum",
+      "params": [
+        {
+          "name": "a",
+          "param_type": {
+            "Simple": "i32"
+          }
+        },
+        {
+          "name": "b",
+          "param_type": {
+            "Simple": "i32"
+          }
         }
+      ],
+      "return_type": "i32",
+      "body": {
+        "statements": [
+          {
+            "Return": {
+              "BinaryOperation": {
+                "lhs": {
+                  "Variable": "a"
+                },
+                "operator": "Add",
+                "rhs": {
+                  "Variable": "b"
+                }
+              }
+            }
+          }
+        ]
       }
     }
   }

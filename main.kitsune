@@ -1,1 +1,11 @@
-x += 3^4<<4;
+fn main() {
+    let x: i32 = 54;
+    let y: i32 = 7;
+    let k: Vec<Option<String>> = [3,4,5];
+
+    let z = sum(x, y);
+}
+
+fn sum(a:i32, b:i32) -> i32 {
+    return a + b;
+}
