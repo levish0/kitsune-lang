@@ -1,8 +1,8 @@
-fn main() {
+fn main() -> i32 {
     let x: i32 = 54;
     let y: i32 = 7;
     let k: Vec<Option<String>> = [3,4,5];
-
+    let z <= 3;
     let z = sum(x, y);
 }
 

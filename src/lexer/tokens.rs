@@ -73,9 +73,9 @@ pub enum Token {
     BitOr,
     #[token("^")]
     BitXor,
-    #[token("<<")]
+    #[token("<<-")]
     Shl,
-    #[token(">>")]
+    #[token("->>")]
     Shr,
     // 비교 연산자
     #[token("<")]

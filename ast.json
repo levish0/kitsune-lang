@@ -4,7 +4,7 @@
       "visibility": "Private",
       "name": "main",
       "params": [],
-      "return_type": null,
+      "return_type": "i32",
       "body": {
         "statements": [
           {
@@ -37,7 +37,14 @@
                   "name": "Vec",
                   "params": [
                     {
-                      "Simple": "i32"
+                      "Generic": {
+                        "name": "Option",
+                        "params": [
+                          {
+                            "Simple": "String"
+                          }
+                        ]
+                      }
                     }
                   ]
                 }

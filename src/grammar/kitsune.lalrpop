@@ -46,8 +46,8 @@ extern {
         "&" => Token::BitAnd,
         "|" => Token::BitOr,
         "^" => Token::BitXor,
-        "<<" => Token::Shl,
-        ">>" => Token::Shr,
+        "<<-" => Token::Shl,
+        "->>" => Token::Shr,
         // 비교연산자
         "==" => Token::EqEq,
         "!=" => Token::NotEq,
@@ -336,12 +336,12 @@ pub ComparisonOperator: ast::Operator = {
 };
 // 8. Bit Shift (<<, >>)
 pub BitShiftExpr: Box<ast::Expression> = {
-    <lhs:BitShiftExpr> "<<" <rhs:AdditiveExpr> => Box::new(ast::Expression::BinaryOperation {
+    <lhs:BitShiftExpr> "<<-" <rhs:AdditiveExpr> => Box::new(ast::Expression::BinaryOperation {
         lhs,
         operator: ast::Operator::Shl,
         rhs,
     }),
-    <lhs:BitShiftExpr> ">>" <rhs:AdditiveExpr> => Box::new(ast::Expression::BinaryOperation {
+    <lhs:BitShiftExpr> "->>" <rhs:AdditiveExpr> => Box::new(ast::Expression::BinaryOperation {
         lhs,
         operator: ast::Operator::Shr,
         rhs,
