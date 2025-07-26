@@ -7,6 +7,7 @@ mod codegen;
 mod node;
 mod parser;
 mod utils;
+mod ast;
 
 fn main() -> io::Result<()> {
     let input_path = "main.kitsune";
