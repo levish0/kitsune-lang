@@ -1,6 +1,5 @@
 use crate::ast::ast::*;
 use std::collections::{HashMap, HashSet};
-use std::fmt::Write;
 
 pub trait Visitor<T> {
     fn visit_statement(&mut self, stmt: &Statement) -> T;
@@ -68,7 +67,11 @@ impl SemanticAnalyzer {
     // 1단계: 함수 시그니처 수집
     pub fn collect_function_signatures(&mut self, statements: &[Statement]) {
         for stmt in statements {
-            todo!()
+            self.collect_function_signature_recursive(stmt);
         }
+    }
+
+    pub fn collect_function_signature_recursive(&mut self, stmt: &Statement) {
+        todo!()
     }
 }
