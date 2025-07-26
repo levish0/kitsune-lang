@@ -1,5 +1,5 @@
-use kitsune_script::grammar::kitsune::KitsuneScriptParser;
-use kitsune_script::lexer::kitsune_lexer::Lexer;
+use kitsune_lang::grammar::kitsune::KitsuneScriptParser;
+use kitsune_lang::lexer::kitsune_lexer::Lexer;
 use std::fs;
 use std::fs::File;
 use std::io::Write;

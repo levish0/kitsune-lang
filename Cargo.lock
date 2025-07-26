@@ -181,7 +181,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "kitsune-script"
+name = "kitsune-lang"
 version = "0.1.0"
 dependencies = [
  "lalrpop",

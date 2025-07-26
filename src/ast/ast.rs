@@ -16,6 +16,15 @@ pub enum Statement {
         name: String,
         value: Box<Expression>,
     },
+    Assignment {
+        target: String,
+        value: Box<Expression>,
+    },
+    CompoundAssignment {
+        target: String,
+        operator: AssignOperator,
+        value: Box<Expression>,
+    },
     For {
         var_name: String,
         iterable: Box<Expression>,
@@ -85,17 +94,46 @@ pub enum UnaryOperator {
     Pos, // +
     Not, // !
 }
+
 #[derive(Clone, Debug, PartialEq, Serialize)]
 pub enum Operator {
-    Add,
-    Sub,
-    Mul,
-    Div,
-    Mod,
-    Eq,
-    NotEq,
-    Lt,
-    LtEq,
-    Gt,
-    GtEq,
+    // 산술 연산자
+    Add, // +
+    Sub, // -
+    Mul, // *
+    Div, // /
+    Mod, // % (새로 추가)
+
+    // 비교 연산자
+    Eq,    // ==
+    NotEq, // !=
+    Lt,    // <
+    LtEq,  // <=
+    Gt,    // >
+    GtEq,  // >=
+
+    // 논리 연산자 (새로 추가)
+    And, // &&
+    Or,  // ||
+
+    // 비트와이즈 연산자 (새로 추가)
+    BitAnd, // &
+    BitOr,  // |
+    BitXor, // ^
+    Shl,    // <<
+    Shr,    // >>
+}
+
+#[derive(Clone, Debug, PartialEq, Serialize)]
+pub enum AssignOperator {
+    Add,    // +=
+    Sub,    // -=
+    Mul,    // *=
+    Div,    // /=
+    Mod,    // %=
+    BitAnd, // &=
+    BitOr,  // |=
+    BitXor, // ^=
+    Shl,    // <<=
+    Shr,    // >>=
 }

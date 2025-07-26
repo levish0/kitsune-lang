@@ -1,21 +1,25 @@
 [
   {
-    "Expression": {
-      "BinaryOperation": {
-        "lhs": {
-          "BinaryOperation": {
-            "lhs": {
-              "Variable": "x"
-            },
-            "operator": "Lt",
-            "rhs": {
-              "Variable": "y"
+    "CompoundAssignment": {
+      "target": "x",
+      "operator": "Add",
+      "value": {
+        "BinaryOperation": {
+          "lhs": {
+            "Integer": 3
+          },
+          "operator": "BitXor",
+          "rhs": {
+            "BinaryOperation": {
+              "lhs": {
+                "Integer": 4
+              },
+              "operator": "Shl",
+              "rhs": {
+                "Integer": 4
+              }
             }
           }
-        },
-        "operator": "LtEq",
-        "rhs": {
-          "Integer": 4
         }
       }
     }

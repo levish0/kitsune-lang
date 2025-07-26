@@ -18,8 +18,6 @@ pub enum Token {
     Comma,
     #[token(";")]
     Semicolon,
-    #[token("!")]
-    Bang,
     #[token("+")]
     Plus,
     #[token("-")]
@@ -36,6 +34,46 @@ pub enum Token {
     EqEq,
     #[token("!=")]
     NotEq,
+    // 할당 연산자
+    #[token("+=")]
+    AddAssign,
+    #[token("-=")]
+    SubAssign,
+    #[token("*=")]
+    MulAssign,
+    #[token("/=")]
+    DivAssign,
+    #[token("%=")]
+    ModAssign,
+    #[token("&=")]
+    BitAndAssign,
+    #[token("|=")]
+    BitOrAssign,
+    #[token("^=")]
+    BitXorAssign,
+    #[token("<<=")]
+    ShlAssign,
+    #[token(">>=")]
+    ShrAssign,
+    // 논리 연산자
+    #[token("!")]
+    Bang,
+    #[token("&&")]
+    And,
+    #[token("||")]
+    Or,
+    // 비트 연산자
+    #[token("&")]
+    BitAnd,
+    #[token("|")]
+    BitOr,
+    #[token("^")]
+    BitXor,
+    #[token("<<")]
+    Shl,
+    #[token(">>")]
+    Shr,
+    // 비교 연산자
     #[token("<")]
     Lt,
     #[token("<=")]

@@ -19,13 +19,33 @@ extern {
         ".." => Token::Range,
         "=" => Token::Eq,
         ";" => Token::Semicolon,
-        "!" => Token::Bang,
         "*" => Token::Star,
         "/" => Token::Slash,
         "+" => Token::Plus,
         "-" => Token::Minus,
         ":" => Token::Colon,
         "->" => Token::Arrow,
+        // 할당 연산자
+        "+=" => Token::AddAssign,
+        "-=" => Token::SubAssign,
+        "*=" => Token::MulAssign,
+        "/=" => Token::DivAssign,
+        "%=" => Token::ModAssign,
+        "&=" => Token::BitAndAssign,
+        "|=" => Token::BitOrAssign,
+        "^=" => Token::BitXorAssign,
+        "<<=" => Token::ShlAssign,
+        ">>=" => Token::ShrAssign,
+        // 논리 연산자
+        "!" => Token::Bang,
+        "&&" => Token::And,
+        "||" => Token::Or,
+        // 비트 연산자
+        "&" => Token::BitAnd,
+        "|" => Token::BitOr,
+        "^" => Token::BitXor,
+        "<<" => Token::Shl,
+        ">>" => Token::Shr,
         // 비교연산자
         "==" => Token::EqEq,
         "!=" => Token::NotEq,
@@ -118,12 +138,38 @@ pub Statement: ast::Statement = {
     "return" <expr:Expression?> ";" => {
         ast::Statement::Return(expr)
     },
+    // 할당문
+    <target:"identifier"> "=" <value:Expression> ";" => {
+        ast::Statement::Assignment {
+            target,
+            value,
+        }
+    },
+    // 복합 할당문
+    <target:"identifier"> <op:CompoundAssignOperator> <value:Expression> ";" => {
+        ast::Statement::CompoundAssignment {
+            target,
+            operator: op,
+            value,
+        }
+    },
     // 표현식 문
     <expr:Expression> ";" => {
         ast::Statement::Expression(expr)
     },
 }
-
+pub CompoundAssignOperator: ast::AssignOperator = {
+    "+=" => ast::AssignOperator::Add,
+    "-=" => ast::AssignOperator::Sub,
+    "*=" => ast::AssignOperator::Mul,
+    "/=" => ast::AssignOperator::Div,
+    "%=" => ast::AssignOperator::Mod,
+    "&=" => ast::AssignOperator::BitAnd,
+    "|=" => ast::AssignOperator::BitOr,
+    "^=" => ast::AssignOperator::BitXor,
+    "<<=" => ast::AssignOperator::Shl,
+    ">>=" => ast::AssignOperator::Shr,
+};
 pub Block: ast::Block = {
     "{" <stmts:Statement*> "}" => {
         ast::Block { statements: stmts }
@@ -154,7 +200,20 @@ pub ReturnType: String = {
 pub Expression: Box<ast::Expression> = {
     <range:RangeExpr> => range,
 };
-// 제일 낮은 우선순위
+
+// 연산자 우선순위 (낮음 → 높음):
+// 1. Range (.., ..=)
+// 2. LogicalOr (||)
+// 3. LogicalAnd (&&)
+// 4. BitOr (|)
+// 5. BitXor (^)
+// 6. BitAnd (&)
+// 7. Comparison (==, !=, <, <=, >, >=)
+// 8. BitShift (<<, >>)
+// 9. Additive (+, -)
+// 10. Multiplicative (*, /, %)
+// 11. Unary (-, +, !)
+// 12. Term (literals, variables, function calls, parentheses)
 pub RangeExpr: Box<ast::Expression> = {
     <start:AdditiveExpr> "..=" <end:AdditiveExpr> => Box::new(ast::Expression::Range {
         start,
@@ -166,43 +225,87 @@ pub RangeExpr: Box<ast::Expression> = {
         end,
         inclusive: false,
     }),
+    <logical_or:LogicalOrExpr> => logical_or,
+};
+// 2. Logical OR (||)
+pub LogicalOrExpr: Box<ast::Expression> = {
+    <lhs:LogicalOrExpr> "||" <rhs:LogicalAndExpr> => Box::new(ast::Expression::BinaryOperation {
+        lhs,
+        operator: ast::Operator::Or,
+        rhs,
+    }),
+    <logical_and:LogicalAndExpr> => logical_and,
+};
+
+// 3. Logical AND (&&)
+pub LogicalAndExpr: Box<ast::Expression> = {
+    <lhs:LogicalAndExpr> "&&" <rhs:BitOrExpr> => Box::new(ast::Expression::BinaryOperation {
+        lhs,
+        operator: ast::Operator::And,
+        rhs,
+    }),
+    <bit_or:BitOrExpr> => bit_or,
+};
+// 4. Bitwise OR (|)
+pub BitOrExpr: Box<ast::Expression> = {
+    <lhs:BitOrExpr> "|" <rhs:BitXorExpr> => Box::new(ast::Expression::BinaryOperation {
+        lhs,
+        operator: ast::Operator::BitOr,
+        rhs,
+    }),
+    <bit_xor:BitXorExpr> => bit_xor,
+};
+
+// 5. Bitwise XOR (^)
+pub BitXorExpr: Box<ast::Expression> = {
+    <lhs:BitXorExpr> "^" <rhs:BitAndExpr> => Box::new(ast::Expression::BinaryOperation {
+        lhs,
+        operator: ast::Operator::BitXor,
+        rhs,
+    }),
+    <bit_and:BitAndExpr> => bit_and,
+};
+// 6. Bitwise AND (&)
+pub BitAndExpr: Box<ast::Expression> = {
+    <lhs:BitAndExpr> "&" <rhs:ComparisonExpr> => Box::new(ast::Expression::BinaryOperation {
+        lhs,
+        operator: ast::Operator::BitAnd,
+        rhs,
+    }),
     <comp:ComparisonExpr> => comp,
 };
 // 그 다음 우선순위 (1)
 pub ComparisonExpr: Box<ast::Expression> = {
-    <lhs:ComparisonExpr> "==" <rhs:AdditiveExpr> => Box::new(ast::Expression::BinaryOperation {
+    <lhs:ComparisonExpr> <op:ComparisonOperator> <rhs:BitShiftExpr> => Box::new(ast::Expression::BinaryOperation {
         lhs,
-        operator: ast::Operator::Eq,
+        operator: op,
         rhs,
     }),
-    <lhs:ComparisonExpr> "!=" <rhs:AdditiveExpr> => Box::new(ast::Expression::BinaryOperation {
+    <bit_shift:BitShiftExpr> => bit_shift,
+};
+pub ComparisonOperator: ast::Operator = {
+    "==" => ast::Operator::Eq,
+    "!=" => ast::Operator::NotEq,
+    "<" => ast::Operator::Lt,
+    "<=" => ast::Operator::LtEq,
+    ">" => ast::Operator::Gt,
+    ">=" => ast::Operator::GtEq,
+};
+// 8. Bit Shift (<<, >>)
+pub BitShiftExpr: Box<ast::Expression> = {
+    <lhs:BitShiftExpr> "<<" <rhs:AdditiveExpr> => Box::new(ast::Expression::BinaryOperation {
         lhs,
-        operator: ast::Operator::NotEq,
+        operator: ast::Operator::Shl,
         rhs,
     }),
-    <lhs:ComparisonExpr> "<" <rhs:AdditiveExpr> => Box::new(ast::Expression::BinaryOperation {
+    <lhs:BitShiftExpr> ">>" <rhs:AdditiveExpr> => Box::new(ast::Expression::BinaryOperation {
         lhs,
-        operator: ast::Operator::Lt,
-        rhs,
-    }),
-    <lhs:ComparisonExpr> "<=" <rhs:AdditiveExpr> => Box::new(ast::Expression::BinaryOperation {
-        lhs,
-        operator: ast::Operator::LtEq,
-        rhs,
-    }),
-    <lhs:ComparisonExpr> ">" <rhs:AdditiveExpr> => Box::new(ast::Expression::BinaryOperation {
-        lhs,
-        operator: ast::Operator::Gt,
-        rhs,
-    }),
-    <lhs:ComparisonExpr> ">=" <rhs:AdditiveExpr> => Box::new(ast::Expression::BinaryOperation {
-        lhs,
-        operator: ast::Operator::GtEq,
+        operator: ast::Operator::Shr,
         rhs,
     }),
     <add:AdditiveExpr> => add,
 };
-// 그 다음 우선순위 (2)
+// 9. Additive (+, -)
 pub AdditiveExpr: Box<ast::Expression> = {
     <lhs:AdditiveExpr> "+" <rhs:MultiplicativeExpr> => Box::new(ast::Expression::BinaryOperation {
         lhs,
@@ -216,7 +319,7 @@ pub AdditiveExpr: Box<ast::Expression> = {
     }),
     <mul:MultiplicativeExpr> => mul,
 };
-// 그 다음 우선순위 (2)
+// 10. Multiplicative (*, /, %)
 pub MultiplicativeExpr: Box<ast::Expression> = {
     <lhs:MultiplicativeExpr> "*" <rhs:UnaryExpr> => Box::new(ast::Expression::BinaryOperation {
         lhs,
