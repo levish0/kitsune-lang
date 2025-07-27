@@ -70,7 +70,6 @@ pub enum Visibility {
     InCrate,
 
 }
-
 #[derive(Debug, Clone, PartialEq, Serialize)]
 pub struct Parameter {
     pub name: String,

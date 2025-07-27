@@ -15,12 +15,11 @@ pub fn element_parser(input: Span) -> IResult<Span, Vec<KitsuneElement>> {
         // Comment
         multiline_comment_parser.map(KitsuneElement::Trivia),
         inline_comment_parser.map(KitsuneElement::Trivia),
+        tokens_trivia_parser.map(KitsuneElement::Trivia),
         // Function
         function_parser.map(KitsuneElement::Function),
         // Expression
         expression_parser.map(KitsuneElement::Expression),
-        // Trivia
-        tokens_trivia_parser.map(KitsuneElement::Trivia),
     )))
     .parse(input)
 }

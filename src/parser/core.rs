@@ -5,7 +5,7 @@ use nom::IResult;
 use nom::Parser;
 use nom::multi::many0;
 
-pub fn parse_kitsune_lang(input: &str) -> Vec<KitsuneElement> {
+pub fn parse_kitsune(input: &str) -> Vec<KitsuneElement> {
     let spanned_input = Span::new(input);
     let parsed_result = kitsune_parser(spanned_input);
     println!("{:?}", parsed_result);
@@ -26,3 +26,4 @@ pub fn kitsune_parser(input: Span) -> IResult<Span, Vec<KitsuneElement>> {
             (remaining_input, elements)
         })
 }
+

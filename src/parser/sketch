@@ -1,0 +1,743 @@
+use nom::{
+    branch::alt,
+    bytes::complete::{tag, take_while1, take_until},
+    character::complete::{
+        alpha1, alphanumeric1, char, digit1, multispace0, multispace1, none_of, one_of,
+    },
+    combinator::{cut, map, map_res, opt, recognize, value},
+    error::{context, VerboseError},
+    multi::{many0, separated_list0, separated_list1},
+    sequence::{delimited, pair, preceded, terminated, tuple},
+    IResult, Parser,
+};
+use nom_locate::{position, LocatedSpan};
+use std::str::FromStr;
+
+// 위치 정보를 포함한 입력 타입
+pub type Span<'a> = LocatedSpan<&'a str>;
+pub type ParseResult<'a, T> = IResult<Span<'a>, T, VerboseError<Span<'a>>>;
+
+// AST 모듈 (기존 구조 가정)
+use crate::ast::ast;
+
+// 공백 및 주석 처리
+fn ws<'a, F, O>(inner: F) -> impl FnMut(Span<'a>) -> ParseResult<'a, O>
+where
+    F: FnMut(Span<'a>) -> ParseResult<'a, O>,
+{
+    delimited(multispace0, inner, multispace0)
+}
+
+// 식별자 파싱 - [a-zA-Z_][a-zA-Z0-9_]*
+fn identifier(input: Span) -> ParseResult<String> {
+    context(
+        "identifier",
+        map(
+            recognize(pair(
+                alt((alpha1, tag("_"))),
+                many0(alt((alphanumeric1, tag("_")))),
+            )),
+            |s: Span| s.fragment().to_string(),
+        ),
+    )(input)
+}
+
+// 이스케이프 문자 파싱
+fn escaped_char(input: Span) -> ParseResult<char> {
+    preceded(
+        char('\\'),
+        alt((
+            value('\n', char('n')),
+            value('\r', char('r')),
+            value('\t', char('t')),
+            value('\\', char('\\')),
+            value('"', char('"')),
+            value('\0', char('0')),
+        )),
+    )(input)
+}
+
+// 문자열 내부 문자 파싱
+fn string_char(input: Span) -> ParseResult<char> {
+    alt((
+        escaped_char,
+        none_of("\"\\"),
+    ))(input)
+}
+
+// 문자열 리터럴 파싱 - "([^"\\]|\\.)*"
+fn string_literal(input: Span) -> ParseResult<String> {
+    context(
+        "string literal",
+        delimited(
+            char('"'),
+            map(many0(string_char), |chars| chars.into_iter().collect()),
+            char('"'),
+        ),
+    )(input)
+}
+
+// 부동소수점 리터럴 파싱 - ([0-9]+\.[0-9]+|[0-9]+[eE][+-]?[0-9]+)
+fn float_literal(input: Span) -> ParseResult<f64> {
+    context(
+        "float literal",
+        map_res(
+            recognize(alt((
+                // [0-9]+\.[0-9]+
+                tuple((digit1, char('.'), digit1)),
+                // [0-9]+[eE][+-]?[0-9]+
+                tuple((
+                    digit1,
+                    one_of("eE"),
+                    opt(one_of("+-")),
+                    digit1,
+                )),
+            ))),
+            |s: Span| s.fragment().parse::<f64>(),
+        ),
+    )(input)
+}
+
+// 정수 리터럴 파싱 - [0-9]+
+fn integer_literal(input: Span) -> ParseResult<i64> {
+    context(
+        "integer literal",
+        map_res(
+            recognize(digit1),
+            |s: Span| s.fragment().parse::<i64>(),
+        ),
+    )(input)
+}
+
+// 키워드 파싱 헬퍼
+fn keyword<'a>(kw: &'static str) -> impl FnMut(Span<'a>) -> ParseResult<'a, ()> {
+    move |input: Span<'a>| {
+        let (input, _) = tag(kw)(input)?;
+        // 키워드 뒤에 알파벳이나 숫자가 오면 안됨
+        let (input, _) = nom::combinator::not(alphanumeric1)(input)?;
+        Ok((input, ()))
+    }
+}
+
+// 연산자 파싱
+fn compound_assign_operator(input: Span) -> ParseResult<ast::AssignOperator> {
+    alt((
+        value(ast::AssignOperator::Add, tag("+=")),
+        value(ast::AssignOperator::Sub, tag("-=")),
+        value(ast::AssignOperator::Mul, tag("*=")),
+        value(ast::AssignOperator::Div, tag("/=")),
+        value(ast::AssignOperator::Mod, tag("%=")),
+        value(ast::AssignOperator::BitAnd, tag("&=")),
+        value(ast::AssignOperator::BitOr, tag("|=")),
+        value(ast::AssignOperator::BitXor, tag("^=")),
+        value(ast::AssignOperator::Shl, tag("<<=")),
+        value(ast::AssignOperator::Shr, tag(">>=")),
+    ))(input)
+}
+
+fn comparison_operator(input: Span) -> ParseResult<ast::Operator> {
+    alt((
+        value(ast::Operator::Eq, tag("==")),
+        value(ast::Operator::NotEq, tag("!=")),
+        value(ast::Operator::LtEq, tag("<=")),
+        value(ast::Operator::GtEq, tag(">=")),
+        value(ast::Operator::Lt, tag("<")),
+        value(ast::Operator::Gt, tag(">")),
+    ))(input)
+}
+
+// 타입 표현식 파싱
+fn type_expr(input: Span) -> ParseResult<ast::Type> {
+    alt((
+        // Generic type: identifier<type1, type2, ...>
+        map(
+            tuple((
+                identifier,
+                delimited(
+                    ws(char('<')),
+                    type_expr_array,
+                    ws(char('>')),
+                ),
+            )),
+            |(name, params)| ast::Type::Generic { name, params },
+        ),
+        // Simple type: identifier
+        map(identifier, ast::Type::Simple),
+    ))(input)
+}
+
+fn type_expr_array(input: Span) -> ParseResult<Vec<ast::Type>> {
+    separated_list1(ws(char(',')), type_expr)(input)
+}
+
+fn type_annotation(input: Span) -> ParseResult<ast::Type> {
+    preceded(ws(char(':')), type_expr)(input)
+}
+
+// 매개변수 파싱
+fn parameter(input: Span) -> ParseResult<ast::Parameter> {
+    map(
+        tuple((identifier, opt(preceded(ws(char(':')), type_expr)))),
+        |(name, param_type)| ast::Parameter { name, param_type },
+    )(input)
+}
+
+fn param_list(input: Span) -> ParseResult<Vec<ast::Parameter>> {
+    separated_list1(ws(char(',')), parameter)(input)
+}
+
+// 반환 타입 파싱
+fn return_type(input: Span) -> ParseResult<String> {
+    preceded(ws(tag("->")), identifier)(input)
+}
+
+// 블록 파싱
+fn block(input: Span) -> ParseResult<ast::Block> {
+    map(
+        delimited(ws(char('{')), many0(statement), ws(char('}'))),
+        |statements| ast::Block { statements },
+    )(input)
+}
+
+// 인수 리스트 파싱
+fn arg_list(input: Span) -> ParseResult<Vec<Box<ast::Expression>>> {
+    separated_list1(ws(char(',')), expression)(input)
+}
+
+// 표현식 파싱 (연산자 우선순위에 따라)
+fn expression(input: Span) -> ParseResult<Box<ast::Expression>> {
+    range_expr(input)
+}
+
+// 1. Range 표현식 (최저 우선순위)
+fn range_expr(input: Span) -> ParseResult<Box<ast::Expression>> {
+    alt((
+        map(
+            tuple((additive_expr, ws(tag("..=")), additive_expr)),
+            |(start, _, end)| {
+                Box::new(ast::Expression::Range {
+                    start,
+                    end,
+                    inclusive: true,
+                })
+            },
+        ),
+        map(
+            tuple((additive_expr, ws(tag("..")), additive_expr)),
+            |(start, _, end)| {
+                Box::new(ast::Expression::Range {
+                    start,
+                    end,
+                    inclusive: false,
+                })
+            },
+        ),
+        logical_or_expr,
+    ))(input)
+}
+
+// 2. Logical OR 표현식
+fn logical_or_expr(input: Span) -> ParseResult<Box<ast::Expression>> {
+    let (input, first) = logical_and_expr(input)?;
+    let (input, rest) = many0(tuple((ws(tag("||")), logical_and_expr)))(input)?;
+
+    Ok((
+        input,
+        rest.into_iter().fold(first, |lhs, (_, rhs)| {
+            Box::new(ast::Expression::BinaryOperation {
+                lhs,
+                operator: ast::Operator::Or,
+                rhs,
+            })
+        }),
+    ))
+}
+
+// 3. Logical AND 표현식
+fn logical_and_expr(input: Span) -> ParseResult<Box<ast::Expression>> {
+    let (input, first) = bit_or_expr(input)?;
+    let (input, rest) = many0(tuple((ws(tag("&&")), bit_or_expr)))(input)?;
+
+    Ok((
+        input,
+        rest.into_iter().fold(first, |lhs, (_, rhs)| {
+            Box::new(ast::Expression::BinaryOperation {
+                lhs,
+                operator: ast::Operator::And,
+                rhs,
+            })
+        }),
+    ))
+}
+
+// 4. Bitwise OR 표현식
+fn bit_or_expr(input: Span) -> ParseResult<Box<ast::Expression>> {
+    let (input, first) = bit_xor_expr(input)?;
+    let (input, rest) = many0(tuple((ws(char('|')), bit_xor_expr)))(input)?;
+
+    Ok((
+        input,
+        rest.into_iter().fold(first, |lhs, (_, rhs)| {
+            Box::new(ast::Expression::BinaryOperation {
+                lhs,
+                operator: ast::Operator::BitOr,
+                rhs,
+            })
+        }),
+    ))
+}
+
+// 5. Bitwise XOR 표현식
+fn bit_xor_expr(input: Span) -> ParseResult<Box<ast::Expression>> {
+    let (input, first) = bit_and_expr(input)?;
+    let (input, rest) = many0(tuple((ws(char('^')), bit_and_expr)))(input)?;
+
+    Ok((
+        input,
+        rest.into_iter().fold(first, |lhs, (_, rhs)| {
+            Box::new(ast::Expression::BinaryOperation {
+                lhs,
+                operator: ast::Operator::BitXor,
+                rhs,
+            })
+        }),
+    ))
+}
+
+// 6. Bitwise AND 표현식
+fn bit_and_expr(input: Span) -> ParseResult<Box<ast::Expression>> {
+    let (input, first) = comparison_expr(input)?;
+    let (input, rest) = many0(tuple((ws(char('&')), comparison_expr)))(input)?;
+
+    Ok((
+        input,
+        rest.into_iter().fold(first, |lhs, (_, rhs)| {
+            Box::new(ast::Expression::BinaryOperation {
+                lhs,
+                operator: ast::Operator::BitAnd,
+                rhs,
+            })
+        }),
+    ))
+}
+
+// 7. Comparison 표현식
+fn comparison_expr(input: Span) -> ParseResult<Box<ast::Expression>> {
+    let (input, first) = bit_shift_expr(input)?;
+    let (input, rest) = many0(tuple((ws(comparison_operator), bit_shift_expr)))(input)?;
+
+    Ok((
+        input,
+        rest.into_iter().fold(first, |lhs, (op, rhs)| {
+            Box::new(ast::Expression::BinaryOperation {
+                lhs,
+                operator: op,
+                rhs,
+            })
+        }),
+    ))
+}
+
+// 8. Bit Shift 표현식
+fn bit_shift_expr(input: Span) -> ParseResult<Box<ast::Expression>> {
+    let (input, first) = additive_expr(input)?;
+    let (input, rest) = many0(alt((
+        tuple((
+            ws(tag("<<")),
+            map(additive_expr, |rhs| (ast::Operator::Shl, rhs)),
+        )),
+        tuple((
+            ws(tag(">>")),
+            map(additive_expr, |rhs| (ast::Operator::Shr, rhs)),
+        )),
+    )))(input)?;
+
+    Ok((
+        input,
+        rest.into_iter().fold(first, |lhs, (_, (op, rhs))| {
+            Box::new(ast::Expression::BinaryOperation {
+                lhs,
+                operator: op,
+                rhs,
+            })
+        }),
+    ))
+}
+
+// 9. Additive 표현식
+fn additive_expr(input: Span) -> ParseResult<Box<ast::Expression>> {
+    let (input, first) = multiplicative_expr(input)?;
+    let (input, rest) = many0(alt((
+        tuple((
+            ws(char('+')),
+            map(multiplicative_expr, |rhs| (ast::Operator::Add, rhs)),
+        )),
+        tuple((
+            ws(char('-')),
+            map(multiplicative_expr, |rhs| (ast::Operator::Sub, rhs)),
+        )),
+    )))(input)?;
+
+    Ok((
+        input,
+        rest.into_iter().fold(first, |lhs, (_, (op, rhs))| {
+            Box::new(ast::Expression::BinaryOperation {
+                lhs,
+                operator: op,
+                rhs,
+            })
+        }),
+    ))
+}
+
+// 10. Multiplicative 표현식
+fn multiplicative_expr(input: Span) -> ParseResult<Box<ast::Expression>> {
+    let (input, first) = unary_expr(input)?;
+    let (input, rest) = many0(alt((
+        tuple((
+            ws(char('*')),
+            map(unary_expr, |rhs| (ast::Operator::Mul, rhs)),
+        )),
+        tuple((
+            ws(char('/')),
+            map(unary_expr, |rhs| (ast::Operator::Div, rhs)),
+        )),
+    )))(input)?;
+
+    Ok((
+        input,
+        rest.into_iter().fold(first, |lhs, (_, (op, rhs))| {
+            Box::new(ast::Expression::BinaryOperation {
+                lhs,
+                operator: op,
+                rhs,
+            })
+        }),
+    ))
+}
+
+// 11. Unary 표현식
+fn unary_expr(input: Span) -> ParseResult<Box<ast::Expression>> {
+    alt((
+        map(
+            preceded(ws(char('-')), unary_expr),
+            |expr| {
+                Box::new(ast::Expression::UnaryOperation {
+                    operator: ast::UnaryOperator::Neg,
+                    expr,
+                })
+            },
+        ),
+        map(
+            preceded(ws(char('+')), unary_expr),
+            |expr| {
+                Box::new(ast::Expression::UnaryOperation {
+                    operator: ast::UnaryOperator::Pos,
+                    expr,
+                })
+            },
+        ),
+        map(
+            preceded(ws(char('!')), unary_expr),
+            |expr| {
+                Box::new(ast::Expression::UnaryOperation {
+                    operator: ast::UnaryOperator::Not,
+                    expr,
+                })
+            },
+        ),
+        term,
+    ))(input)
+}
+
+// 12. Term 표현식 (최고 우선순위)
+fn term(input: Span) -> ParseResult<Box<ast::Expression>> {
+    alt((
+        // Float literal (우선순위를 높여서 먼저 시도)
+        map(ws(float_literal), |val| Box::new(ast::Expression::Float(val))),
+        // Integer literal
+        map(ws(integer_literal), |val| Box::new(ast::Expression::Integer(val))),
+        // String literal
+        map(ws(string_literal), |val| Box::new(ast::Expression::String(val))),
+        // Boolean literals
+        map(ws(keyword("true")), |_| Box::new(ast::Expression::Boolean(true))),
+        map(ws(keyword("false")), |_| Box::new(ast::Expression::Boolean(false))),
+        // Array literal
+        map(
+            delimited(ws(char('[')), opt(arg_list), ws(char(']'))),
+            |elements| Box::new(ast::Expression::Array(elements.unwrap_or_default())),
+        ),
+        // Function call (identifier followed by parentheses)
+        map(
+            tuple((
+                identifier,
+                delimited(ws(char('(')), opt(arg_list), ws(char(')'))),
+            )),
+            |(name, args)| {
+                Box::new(ast::Expression::FunctionCall {
+                    name,
+                    args: args.unwrap_or_default(),
+                })
+            },
+        ),
+        // Variable (identifier not followed by parentheses)
+        map(ws(identifier), |name| Box::new(ast::Expression::Variable(name))),
+        // Parenthesized expression
+        delimited(ws(char('(')), expression, ws(char(')'))),
+        // Block expression
+        map(ws(block), |block| Box::new(ast::Expression::Block(block))),
+    ))(input)
+}
+
+// Statement 파싱
+fn statement(input: Span) -> ParseResult<ast::Statement> {
+    alt((
+        // let 문
+        map(
+            tuple((
+                ws(keyword("let")),
+                ws(identifier),
+                opt(ws(type_annotation)),
+                ws(char('=')),
+                ws(expression),
+                ws(char(';')),
+            )),
+            |(_, name, type_annotation, _, value, _)| ast::Statement::Let {
+                name,
+                type_annotation,
+                value,
+            },
+        ),
+        // pub const 문
+        map(
+            tuple((
+                ws(keyword("pub")),
+                ws(keyword("const")),
+                ws(identifier),
+                opt(ws(type_annotation)),
+                ws(char('=')),
+                ws(expression),
+                ws(char(';')),
+            )),
+            |(_, _, name, type_annotation, _, value, _)| ast::Statement::Const {
+                visibility: ast::Visibility::Public,
+                type_annotation,
+                name,
+                value,
+            },
+        ),
+        // const 문
+        map(
+            tuple((
+                ws(keyword("const")),
+                ws(identifier),
+                opt(ws(type_annotation)),
+                ws(char('=')),
+                ws(expression),
+                ws(char(';')),
+            )),
+            |(_, name, type_annotation, _, value, _)| ast::Statement::Const {
+                visibility: ast::Visibility::Private,
+                type_annotation,
+                name,
+                value,
+            },
+        ),
+        // pub static 문
+        map(
+            tuple((
+                ws(keyword("pub")),
+                ws(keyword("static")),
+                ws(identifier),
+                opt(ws(type_annotation)),
+                ws(char('=')),
+                ws(expression),
+                ws(char(';')),
+            )),
+            |(_, _, name, type_annotation, _, value, _)| ast::Statement::Static {
+                visibility: ast::Visibility::Public,
+                type_annotation,
+                name,
+                value,
+            },
+        ),
+        // static 문
+        map(
+            tuple((
+                ws(keyword("static")),
+                ws(identifier),
+                opt(ws(type_annotation)),
+                ws(char('=')),
+                ws(expression),
+                ws(char(';')),
+            )),
+            |(_, name, type_annotation, _, value, _)| ast::Statement::Static {
+                visibility: ast::Visibility::Private,
+                type_annotation,
+                name,
+                value,
+            },
+        ),
+        // pub fn 문
+        map(
+            tuple((
+                ws(keyword("pub")),
+                ws(keyword("fn")),
+                ws(identifier),
+                delimited(ws(char('(')), opt(param_list), ws(char(')'))),
+                opt(ws(return_type)),
+                ws(block),
+            )),
+            |(_, _, name, params, return_type, body)| ast::Statement::Function {
+                visibility: ast::Visibility::Public,
+                name,
+                params: params.unwrap_or_default(),
+                return_type,
+                body,
+            },
+        ),
+        // fn 문
+        map(
+            tuple((
+                ws(keyword("fn")),
+                ws(identifier),
+                delimited(ws(char('(')), opt(param_list), ws(char(')'))),
+                opt(ws(return_type)),
+                ws(block),
+            )),
+            |(_, name, params, return_type, body)| ast::Statement::Function {
+                visibility: ast::Visibility::Private,
+                name,
+                params: params.unwrap_or_default(),
+                return_type,
+                body,
+            },
+        ),
+        // for 문
+        map(
+            tuple((
+                ws(keyword("for")),
+                ws(identifier),
+                ws(keyword("in")),
+                ws(expression),
+                ws(block),
+            )),
+            |(_, var_name, _, iterable, body)| ast::Statement::For {
+                var_name,
+                iterable,
+                body,
+            },
+        ),
+        // while 문
+        map(
+            tuple((ws(keyword("while")), ws(expression), ws(block))),
+            |(_, condition, body)| ast::Statement::While { condition, body },
+        ),
+        // return 문
+        map(
+            tuple((ws(keyword("return")), opt(ws(expression)), ws(char(';')))),
+            |(_, expr, _)| ast::Statement::Return(expr),
+        ),
+        // 복합 할당문
+        map(
+            tuple((
+                ws(identifier),
+                ws(compound_assign_operator),
+                ws(expression),
+                ws(char(';')),
+            )),
+            |(target, operator, value, _)| ast::Statement::CompoundAssignment {
+                target,
+                operator,
+                value,
+            },
+        ),
+        // 할당문
+        map(
+            tuple((ws(identifier), ws(char('=')), ws(expression), ws(char(';')))),
+            |(target, _, value, _)| ast::Statement::Assignment { target, value },
+        ),
+        // 표현식 문
+        map(
+            tuple((ws(expression), ws(char(';')))),
+            |(expr, _)| ast::Statement::Expression(expr),
+        ),
+    ))(input)
+}
+
+// 메인 파서 함수
+pub fn parse_kitsune_script(input: &str) -> Result<Vec<ast::Statement>, VerboseError<Span>> {
+    let span = Span::new(input);
+    let (remaining, statements) = context("KitsuneScript", many0(statement))(span)?;
+
+    if !remaining.fragment().trim().is_empty() {
+        return Err(VerboseError { errors: vec![] });
+    }
+
+    Ok(statements)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_simple_let() {
+        let input = "let x = 42;";
+        let result = parse_kitsune_script(input);
+        assert!(result.is_ok());
+    }
+
+    #[test]
+    fn test_function_declaration() {
+        let input = r#"
+            fn add(a: i32, b: i32) -> i32 {
+                return a + b;
+            }
+        "#;
+        let result = parse_kitsune_script(input);
+        assert!(result.is_ok());
+    }
+
+    #[test]
+    fn test_expression_precedence() {
+        let input = "let result = 1 + 2 * 3;";
+        let result = parse_kitsune_script(input);
+        assert!(result.is_ok());
+    }
+
+    #[test]
+    fn test_range_expressions() {
+        let input = "let range1 = 1..10; let range2 = 1..=10;";
+        let result = parse_kitsune_script(input);
+        assert!(result.is_ok());
+    }
+
+    #[test]
+    fn test_compound_assignment() {
+        let input = "x += 5; y *= 2; z >>= 1;";
+        let result = parse_kitsune_script(input);
+        assert!(result.is_ok());
+    }
+
+    #[test]
+    fn test_string_with_escapes() {
+        let input = r#"let message = "Hello\nWorld\t\"quoted\"\\backslash";"#;
+        let result = parse_kitsune_script(input);
+        assert!(result.is_ok());
+    }
+
+    #[test]
+    fn test_float_literals() {
+        let input = "let pi = 3.14159; let scientific = 1e10; let negative_exp = 2E-5;";
+        let result = parse_kitsune_script(input);
+        assert!(result.is_ok());
+    }
+
+    #[test]
+    fn test_identifier_with_underscores() {
+        let input = "let _private_var = 42; let my_function_name = test_func();";
+        let result = parse_kitsune_script(input);
+        assert!(result.is_ok());
+    }
+}

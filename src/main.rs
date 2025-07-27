@@ -1,7 +1,7 @@
-use crate::parser::core::parse_kitsune_lang;
 use std::fs;
 use std::io::{self, Write};
 use std::time::Instant;
+use crate::parser::core::parse_kitsune;
 
 mod codegen;
 mod node;
@@ -13,7 +13,7 @@ fn main() -> io::Result<()> {
     let input_path = "main.kitsune";
     let content = fs::read_to_string(input_path)?;
     let start_time = Instant::now();
-    let parsed_result = parse_kitsune_lang(&content);
+    let parsed_result = parse_kitsune(&content);
 
     let duration = start_time.elapsed();
 
